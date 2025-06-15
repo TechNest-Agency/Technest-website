@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import PageLayout from '../components/PageLayout';
 import { useCart } from '../context/CartContext';
 import {
@@ -14,22 +14,45 @@ import {
   CommandLineIcon,
   WrenchScrewdriverIcon,
   ChatBubbleBottomCenterTextIcon,
-  CheckIcon,
-  ArrowRightIcon,
   PaintBrushIcon,
-  MegaphoneIcon,  SwatchIcon,
+  MegaphoneIcon,
+  SwatchIcon,
   MapIcon,
   MagnifyingGlassIcon,
   ShoppingCartIcon,
   EnvelopeIcon,
-  BriefcaseIcon
+  BriefcaseIcon,
+  CheckIcon
 } from '@heroicons/react/24/outline';
+
+const pricingTiers = [
+  {
+    name: 'Basic',
+    price: '499',
+    features: ['Basic Web Development', 'Simple Cloud Setup', 'Standard Support'],
+    description: 'Perfect for small businesses',
+    popular: false
+  },
+  {
+    name: 'Professional',
+    price: '999',
+    features: ['Advanced Web Development', 'Cloud Infrastructure', '24/7 Support', 'Mobile App Development'],
+    description: 'Ideal for growing companies',
+    popular: true
+  },
+  {
+    name: 'Enterprise',
+    price: '1999',
+    features: ['Full Digital Transformation', 'Custom Solutions', 'Dedicated Support Team', 'AI Integration'],
+    description: 'For large organizations',
+    popular: false
+  }
+];
 
 const Services = () => {
   const { addToCart } = useCart();
-  const [selectedBillingCycle, setSelectedBillingCycle] = useState('monthly');
-  const [selectedPackage, setSelectedPackage] = useState(null);
   const [selectedTab, setSelectedTab] = useState('all');
+  const [hoveredCard, setHoveredCard] = useState(null);
 
   const services = [
     {
@@ -225,35 +248,7 @@ const Services = () => {
           'Dedicated Team'
         ],
         highlighted: false
-      }
-    ]
-  };
-
-  const handleAddToCart = (pkg) => {
-    let price;
-    
-    if (pkg.priceRange) {
-      // For fixed price packages, extract the number from priceRange
-      price = pkg.priceRange.replace(/[^\d.]/g, '');
-    } else if (pkg.priceVariants) {
-      // For packages with variants, use the first variant's price
-      price = pkg.priceVariants[0].price.replace(/[^\d.]/g, '');
-    } else {
-      // For subscription based packages
-      price = selectedBillingCycle === 'monthly' ? pkg.monthlyPrice : pkg.yearlyPrice;
-    }
-
-    // Clean up price if it ends with "/month"
-    const cleanPrice = price.toString().replace('/month', '');
-    addToCart({
-      id: pkg.title.toLowerCase().replace(/\s+/g, '-'),
-      title: pkg.title,
-      price: parseFloat(cleanPrice).toString(),
-      category: pkg.category,
-      description: pkg.subtitle || pkg.description,
-      features: pkg.features,
-      quantity: 1
-    });
+      }    ]
   };
 
   const containerVariants = {
@@ -496,16 +491,14 @@ const Services = () => {
       priceRange: "$200"
     },
     {
-      title: "UX Discovery Pack",
-      subtitle: "Clarity Before Code",      icon: MapIcon,
+      title: "UX Discovery Pack",      subtitle: "Clarity Before Code",
+      icon: MapIcon,
       category: "design",
       bestFor: "Anyone who has a product idea but no structure yet",
       features: [
         "UX Research (User Personas, Journey Map)",
         "Low-Fidelity Wireframes (Up to 7-10 screens)",
-        "Information Architecture",
-        "User Flow Map (Notion or FigJam)",
-        "Product Strategy Call (30 min)"
+        "Information Architecture"
       ],
       delivery: "7-10 days",
       priceRange: "$300"
@@ -578,11 +571,55 @@ const Services = () => {
     }
   ];
 
+  const handleAddToCart = (service, tier = null) => {
+    const item = {
+      ...service,
+      price: tier ? tier.price : service.price || '999',
+      tier: tier ? tier.name : null
+    };
+    addToCart(item);
+    // Add visual feedback
+    const toast = document.createElement('div');
+    toast.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in-out';
+    toast.textContent = `${service.title} added to cart!`;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  };
+
   return (
     <PageLayout
       title="Our Services"
       subtitle="Comprehensive Digital Solutions for Modern Businesses"
-    >
+    >      {/* Hero Section */}
+      <motion.div
+        className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl overflow-hidden mb-20"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:60px_60px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/50" />
+        
+        <div className="relative max-w-7xl mx-auto py-24 px-6">
+          <motion.h1 
+            className="text-4xl md:text-5xl font-bold text-white text-center mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            Transform Your Digital Presence
+          </motion.h1>
+          <motion.p 
+            className="text-xl text-gray-300 text-center max-w-3xl mx-auto mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            Expert solutions tailored to your business needs
+          </motion.p>
+        </div>
+      </motion.div>
+
       {/* Services Grid */}
       <motion.div
         initial="hidden"
@@ -594,10 +631,10 @@ const Services = () => {
           <motion.div
             key={index}
             variants={itemVariants}
-            whileHover={{ scale: 1.05 }}            className="group relative overflow-hidden rounded-2xl bg-gray-800/50 backdrop-blur-sm p-8 hover:bg-gray-700/50 transition-all duration-300 border border-gray-700/50"
+            whileHover={{ scale: 1.05 }}            className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-800/90 via-gray-800/80 to-gray-900/90 backdrop-blur-lg p-8 hover:bg-gray-700/60 transition-all duration-500 border border-gray-700/30 hover:border-primary-500/50 hover:shadow-xl hover:shadow-primary-500/10 transform hover:-translate-y-1"
           >
             <service.icon className="h-12 w-12 text-primary-400 mb-6" />
-            <span className="inline-block px-3 py-1 bg-primary-900/60 text-primary-300 rounded-full text-sm mb-4 border border-primary-700/50">
+            <span className="inline-flex items-center px-3 py-1 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 text-primary-300 rounded-full text-sm mb-4 border border-primary-500/30 group-hover:border-primary-400/50 transition-all duration-300">
               {service.category}
             </span>
             <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
@@ -613,147 +650,7 @@ const Services = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-primary-900/20 to-secondary-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </motion.div>
         ))}
-      </motion.div>
-
-      {/* Service Packages */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="mb-20"
-      >
-        <motion.h2
-          variants={itemVariants}
-          className="text-3xl font-bold text-white text-center mb-6"
-        >
-          Service Packages
-        </motion.h2>
-        <motion.p
-          variants={itemVariants}
-          className="text-gray-300 text-center mb-12 max-w-2xl mx-auto"
-        >
-          Choose the perfect package for your business needs
-        </motion.p>
-
-        {/* Billing Cycle Toggle */}
-        <motion.div
-          variants={itemVariants}
-          className="flex justify-center items-center space-x-4 mb-12"
-        >
-          <button
-            onClick={() => setSelectedBillingCycle('monthly')}            className={`px-6 py-2 rounded-lg transition-all duration-300 border ${
-              selectedBillingCycle === 'monthly'
-                ? 'bg-gray-800 text-white border-primary-600'
-                : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 border-gray-700/50'
-            }`}
-          >
-            Monthly
-          </button>
-          <button
-            onClick={() => setSelectedBillingCycle('yearly')}
-            className={`px-6 py-2 rounded-lg transition-all duration-300 border ${
-              selectedBillingCycle === 'yearly'
-                ? 'bg-gray-800 text-white border-primary-600'
-                : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 border-gray-700/50'
-            }`}
-          >
-            Yearly
-            <span className="ml-2 text-xs bg-green-500 text-white px-2 py-1 rounded-full">
-              Save 20%
-            </span>
-          </button>
-        </motion.div>
-
-        {/* Package Type Toggle */}
-        <motion.div
-          variants={itemVariants}
-          className="flex justify-center items-center space-x-4 mb-12"
-        >
-          <button
-            onClick={() => setSelectedPackage('web')}            className={`px-6 py-2 rounded-lg transition-all duration-300 border ${
-              selectedPackage === 'web'
-                ? 'bg-gray-800 text-white border-primary-600'
-                : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 border-gray-700/50'
-            }`}
-          >
-            Web Development
-          </button>
-          <button
-            onClick={() => setSelectedPackage('mobile')}
-            className={`px-6 py-2 rounded-lg transition-all duration-300 border ${
-              selectedPackage === 'mobile'
-                ? 'bg-gray-800 text-white border-primary-600'
-                : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 border-gray-700/50'
-            }`}
-          >
-            Mobile Development
-          </button>
-        </motion.div>
-
-        {/* Pricing Tables */}
-        <AnimatePresence mode="wait">
-          {selectedPackage && (
-            <motion.div
-              key={selectedPackage}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            >
-              {servicePackages[selectedPackage].map((pkg, index) => (
-                <motion.div
-                  key={pkg.name}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}                  className={`relative p-8 rounded-2xl overflow-hidden ${
-                    pkg.highlighted
-                      ? 'bg-gray-800/90 backdrop-blur-xl border-2 border-primary-600 shadow-lg shadow-primary-500/20'
-                      : 'bg-gray-800/50 backdrop-blur-sm border border-gray-700/50'
-                  }`}
-                >
-                  {pkg.highlighted && (
-                    <div className="absolute top-0 right-0 bg-primary-600 text-white px-4 py-1 rounded-bl-lg text-sm font-medium">
-                      Popular
-                    </div>
-                  )}
-                  <h3 className="text-2xl font-bold text-white mb-2">{pkg.name}</h3>
-                  <p className="text-gray-300 mb-6">{pkg.description}</p>
-                  <div className="mb-6">
-                    <span className="text-4xl font-bold text-white">
-                      ${selectedBillingCycle === 'monthly' ? pkg.monthlyPrice : pkg.yearlyPrice}
-                    </span>
-                    <span className="text-gray-300 ml-2">
-                      /{selectedBillingCycle === 'monthly' ? 'month' : 'year'}
-                    </span>
-                  </div>
-                  <ul className="space-y-4 mb-8">
-                    {pkg.features.map((feature, fIndex) => (
-                      <li key={fIndex} className="flex items-center text-gray-300">
-                        <CheckIcon className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => handleAddToCart(pkg)}                    className={`w-full py-4 rounded-xl flex items-center justify-center space-x-2 transition-all duration-300 ${
-                      pkg.highlighted
-                        ? 'bg-primary-600 hover:bg-primary-700 text-white shadow-lg shadow-primary-500/20 border border-primary-500/50'
-                        : 'bg-gray-700/50 hover:bg-gray-600/50 text-white border border-gray-600/50'
-                    }`}
-                  >
-                    <span>Get Started</span>
-                    <ArrowRightIcon className="h-5 w-5" />
-                  </motion.button>
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.section>
-
-      {/* Why Choose Us */}
+      </motion.div>      {/* Why Choose Us */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -900,11 +797,10 @@ const Services = () => {
               }`}
             >
               {/* Card Background with Gradient Border */}
-              <div className="absolute inset-0.5 bg-gray-900 rounded-2xl z-0" />
-              <div className={`relative h-full p-8 glass-card group-hover:shadow-glow transition-all duration-300 ${
+              <div className="absolute inset-0.5 bg-gray-900 rounded-2xl z-0" />              <div className={`relative h-full p-8 backdrop-blur-lg backdrop-brightness-125 group-hover:backdrop-brightness-150 transition-all duration-500 ${
                 pkg.featured
-                  ? 'gradient-border'
-                  : ''
+                  ? 'bg-gradient-to-br from-primary-900/10 via-gray-900/95 to-secondary-900/10 border-2 border-primary-500/20'
+                  : 'bg-gradient-to-br from-gray-900/95 via-gray-900/90 to-gray-800/95 border border-gray-700/30'
               }`}>
                 {pkg.featured && (
                   <div className="absolute top-0 right-0 bg-gradient-to-r from-primary-500 to-secondary-500 text-white text-sm px-4 py-1 rounded-bl-lg">
@@ -918,21 +814,27 @@ const Services = () => {
                   {pkg.title}
                 </h3>
                 <p className="text-primary-400 mb-4">{pkg.subtitle}</p>
-                
-                {pkg.priceRange ? (
-                  <div className="text-2xl font-bold text-white mb-4">
+                  {pkg.priceRange ? (
+                  <div className="text-2xl font-bold bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent mb-4">
                     {pkg.priceRange}
+                    {pkg.priceRange.includes('/month') && (
+                      <span className="text-sm font-normal text-gray-400 ml-1">/month</span>
+                    )}
                   </div>
-                ) : (
+                ) : pkg.priceVariants ? (
                   <div className="space-y-2 mb-4">
                     {pkg.priceVariants.map((variant, idx) => (
-                      <div key={idx} className="flex justify-between text-sm">
-                        <span className="text-gray-400">{variant.name}</span>
-                        <span className="text-white font-semibold">{variant.price}</span>
+                      <div key={idx} className="flex justify-between items-center text-sm bg-gray-800/40 p-2 rounded-lg backdrop-blur-sm">
+                        <span className="text-gray-300">{variant.name}</span>
+                        <span className="text-primary-400 font-semibold">{variant.price}</span>
                       </div>
                     ))}
                   </div>
-                )}
+                ) : pkg.monthlyPrice ? (
+                  <div className="text-2xl font-bold bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent mb-4">
+                    ${pkg.monthlyPrice}
+                    <span className="text-sm font-normal text-gray-400 ml-1">/month</span>
+                  </div>                ) : null}
 
                 <p className="text-sm text-gray-400 mb-6">
                   Best For: {pkg.bestFor}
@@ -951,16 +853,20 @@ const Services = () => {
                   <p className="text-sm text-gray-400 mb-6">
                     Delivery: {pkg.delivery}
                   </p>
-                )}
-
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
+                )}                <motion.button
+                  whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => addToCart(pkg)}
-                  className={`w-full py-4 px-6 rounded-lg font-medium transition-all ${
+                  onClick={() => {
+                    const itemToAdd = {
+                      ...pkg,
+                      price: pkg.priceRange || (pkg.priceVariants && pkg.priceVariants[0].price) || `$${pkg.monthlyPrice}`
+                    };
+                    addToCart(itemToAdd);
+                  }}
+                  className={`w-full py-4 px-6 rounded-lg font-medium transition-all duration-300 ${
                     pkg.featured
-                      ? 'bg-gradient-to-r from-primary-500 to-secondary-500 text-white hover:shadow-lg hover:shadow-primary-500/25'
-                      : 'bg-white/10 text-white hover:bg-white/20'
+                      ? 'bg-gradient-to-r from-primary-500 to-secondary-500 text-white hover:shadow-lg hover:shadow-primary-500/25 border border-primary-500/50'
+                      : 'bg-white/5 text-white hover:bg-white/10 border border-gray-700/50 hover:border-primary-500/50'
                   }`}
                 >
                   Get Started

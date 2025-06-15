@@ -16,22 +16,52 @@ export const CartProvider = ({ children }) => {
 
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cartItems));
-    }, [cartItems]);
-
-    const addToCart = (item) => {
-        // Clean up price while preserving decimal points
-        const cleanPrice = item.price?.toString().replace(/[^\d.]/g, '') || '0';
+    }, [cartItems]);    const addToCart = (item) => {
+        // Generate a unique ID that includes the item title to identify similar items
+        const itemId = `${item.title}-${Date.now()}`;
         
-        const productDetails = {
-            id: item.id,
-            title: item.title,
-            price: cleanPrice,
-            type: item.type || 'service',
-            description: item.details || item.description || '',
+        // Handle different price formats
+        let price, priceLabel, priceText;
+        if (item.monthlyPrice) {
+            price = item.monthlyPrice;
+            priceLabel = '/month';
+            priceText = `$${price}${priceLabel}`;
+        } else if (item.priceRange) {
+            const matches = item.priceRange.match(/\$?([\d,]+(?:\.\d{2})?)/g);
+            price = matches ? parseFloat(matches[0].replace(/[$,]/g, '')) : 0;
+            priceLabel = item.priceRange.includes('/month') ? '/month' : '';
+            priceText = item.priceRange;
+        } else if (item.price) {
+            const matches = item.price.match(/\$?([\d,]+(?:\.\d{2})?)/g);
+            price = matches ? parseFloat(matches[0].replace(/[$,]/g, '')) : 0;
+            priceLabel = item.price.includes('/month') ? '/month' : '';
+            priceText = item.price;
+        } else if (item.priceVariants) {
+            const variant = item.selectedVariant || item.priceVariants[0];
+            const matches = variant.price.match(/\$?([\d,]+(?:\.\d{2})?)/g);
+            price = matches ? parseFloat(matches[0].replace(/[$,]/g, '')) : 0;
+            priceLabel = variant.price.includes('/month') ? '/month' : '';
+            priceText = variant.price;
+        } else {
+            price = 0;
+            priceLabel = '';
+            priceText = 'Contact us';
+        }
+          const productDetails = {
+            id: itemId,
+            title: item.title || item.name,
+            price: price,
+            priceText: priceText,
+            priceLabel: priceLabel,
+            type: item.category || 'service',
+            description: item.subtitle || item.description || '',
             category: item.category || '',
             features: item.features || [],
-            duration: item.duration || '',
-            image: item.image || ''
+            duration: item.delivery || '',
+            image: item.image || '',
+            bestFor: item.bestFor || '',
+            tier: item.tier || null,
+            featured: item.featured || false
         };
 
         setCartItems(prev => {

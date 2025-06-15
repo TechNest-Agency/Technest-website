@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Typewriter from 'typewriter-effect';
-import { 
+import {
   ArrowRightIcon,
   CodeBracketIcon,
   UserGroupIcon,
   TrophyIcon,
   CloudArrowUpIcon,
   CpuChipIcon,
-  BeakerIcon
+  BeakerIcon,
+  SparklesIcon
 } from '@heroicons/react/24/outline';
 
 const Home = () => {
@@ -34,7 +35,7 @@ const Home = () => {
       title: "E-Commerce Platform",
       category: "Web Development",
       image: "https://plus.unsplash.com/premium_photo-1683141240629-2fa67d924190",
-      description: "Modern e-commerce solution with headless CMS"
+      description: "Modern e-commerce solution with headless"
     },
     {
       title: "Finance Dashboard",
@@ -79,92 +80,150 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-primary-900 to-secondary-900">
+    <div className="min-h-screen bg-[#0a0a0a] overflow-hidden">
+      <div className="fixed inset-0 bg-grid-pattern opacity-5" />
       {isLoading ? (
-        <div className="fixed inset-0 bg-gray-900 flex items-center justify-center">
+        <div className="fixed inset-0 bg-[#0a0a0a] flex items-center justify-center">
           <motion.div
             animate={{
               scale: [1, 1.2, 1],
               rotate: [0, 180, 360]
             }}
             transition={{
-              duration: 2,
+              duration: 1.5,
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="w-16 h-16 border-4 border-primary-500 border-t-transparent rounded-full"
+            className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full"
           />
         </div>
       ) : (
         <>
-          {/* Hero Section */}
+          {/* Hero Section with 3D Effects */}
           <motion.section
             initial="hidden"
             animate="visible"
             variants={containerVariants}
             className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20"
           >
+            {/* 3D Background Elements */}
             <div className="absolute inset-0 overflow-hidden">
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover opacity-20"
-              >
-                <source src="/path/to/your/video.mp4" type="video/mp4" />
-              </video>
+              <div className="absolute w-full h-full">
+                <motion.div
+                  animate={{
+                    rotateZ: 360,
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px]"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-purple-500/10 to-blue-500/10 rounded-full blur-3xl transform rotate-45" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-orange-500/10 rounded-full blur-3xl transform -rotate-45" />
+                </motion.div>
+              </div>
+              {/* Floating 3D Elements */}
+              <motion.div
+                animate={{
+                  y: [-20, 20],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "easeInOut",
+                }}
+                className="absolute top-1/4 right-[10%] w-32 h-32 bg-gradient-to-br from-orange-500/20 to-purple-500/20 rounded-xl backdrop-blur-3xl transform rotate-12"
+              />
+              <motion.div
+                animate={{
+                  y: [20, -20],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "easeInOut",
+                }}
+                className="absolute bottom-1/4 left-[10%] w-24 h-24 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-full backdrop-blur-3xl"
+              />
             </div>
 
             <div className="relative z-10 max-w-7xl mx-auto text-center">
-              <motion.h1 
-                variants={itemVariants}
-                className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8"
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="mb-8 relative"
               >
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-secondary-400">
-                  Transforming Ideas into
-                </span>
-                <Typewriter
-                  options={{
-                    strings: ['Digital Reality', 'Innovation', 'Success'],
-                    autoStart: true,
-                    loop: true,
-                  }}
-                />
-              </motion.h1>
+                <SparklesIcon className="absolute -top-12 left-1/2 -translate-x-1/2 w-8 h-8 text-orange-500 animate-pulse" />
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight relative">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-purple-500 to-blue-500">
+                    Transform Your
+                  </span>
+                  <br />
+                  <motion.span 
+                    className="mt-4 inline-block perspective-1000"
+                    whileHover={{ scale: 1.05, rotateX: 10 }}
+                  >
+                    <Typewriter
+                      options={{
+                        strings: ['Digital Journey', 'Business Growth', 'Ideas to Reality'],
+                        autoStart: true,
+                        loop: true,
+                        wrapperClassName: "bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-orange-500"
+                      }}
+                    />
+                  </motion.span>
+                </h1>
 
-              <motion.p 
-                variants={itemVariants}
-                className="text-lg md:text-xl text-gray-300 mb-12 max-w-3xl mx-auto px-4"
-              >
-                We create cutting-edge digital solutions that help businesses thrive in the modern world.
-              </motion.p>
+                <motion.p 
+                  variants={itemVariants}
+                  className="mt-8 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed backdrop-blur-sm"
+                >
+                  We create cutting-edge digital solutions that help businesses thrive in the modern world. 
+                  Experience innovation that drives success.
+                </motion.p>
 
-              <motion.div 
-                variants={itemVariants}
-                className="flex flex-col sm:flex-row gap-4 justify-center"
-              >
-                <Link
-                  to="/contact"
-                  className="px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transform transition hover:scale-105 shadow-lg"
+                <motion.div 
+                  variants={itemVariants}
+                  className="mt-10 flex flex-col sm:flex-row gap-6 justify-center items-center"
                 >
-                  Get Started
-                  <ArrowRightIcon className="w-5 h-5 ml-2 inline-block" />
-                </Link>
-                <Link
-                  to="/portfolio"
-                  className="px-8 py-4 bg-secondary-500 hover:bg-secondary-600 text-white rounded-lg transform transition hover:scale-105 shadow-lg"
-                >
-                  View Our Work
-                </Link>
+                  <Link
+                    to="/contact"
+                    className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 rounded-full text-lg font-semibold overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
+                  >
+                    <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+                    <span className="relative flex items-center">
+                      Get Started
+                      <ArrowRightIcon className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </Link>
+                  <Link
+                    to="/portfolio"
+                    className="group relative px-8 py-4 bg-white/5 backdrop-blur-sm text-white rounded-full text-lg font-semibold overflow-hidden transform transition-all duration-300 hover:scale-105"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 via-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <span className="relative">View Our Work</span>
+                  </Link>
+                </motion.div>
               </motion.div>
             </div>
 
-            {/* Floating Tech Badges */}
-            <div className="absolute bottom-10 left-0 right-0 overflow-hidden">
+            {/* Floating Tech Stack with 3D Effect */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="absolute bottom-10 left-0 right-0 overflow-hidden pointer-events-none perspective-1000"
+            >
               <motion.div 
-                initial={{ x: -1000 }}
-                animate={{ x: 1000 }}
+                animate={{ 
+                  x: [-1000, 1000],
+                }}
                 transition={{
                   duration: 20,
                   repeat: Infinity,
@@ -173,88 +232,149 @@ const Home = () => {
                 className="flex gap-8"
               >
                 {technologies.map((tech, index) => (
-                  <div
+                  <motion.div
                     key={index}
-                    className="flex items-center bg-white/10 backdrop-blur-md rounded-full px-4 py-2"
+                    whileHover={{ scale: 1.05, rotateX: 10 }}
+                    className="flex items-center bg-white/5 backdrop-blur-md rounded-xl px-6 py-3 border border-white/10 shadow-xl"
                   >
-                    <img src={tech.logo} alt={tech.name} className="w-6 h-6 mr-2" />
-                    <span className="text-white text-sm">{tech.name}</span>
-                  </div>
+                    <img src={tech.logo} alt={tech.name} className="w-8 h-8 mr-3" />
+                    <span className="text-white/80 text-sm font-medium">{tech.name}</span>
+                  </motion.div>
                 ))}
               </motion.div>
-            </div>
+            </motion.div>
           </motion.section>
 
-          {/* Stats Section */}
+          {/* Stats Section with 3D Cards */}
           <motion.section
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={containerVariants}
-            className="py-16 px-4 sm:px-6 lg:px-8"
+            className="py-24 px-4 sm:px-6 lg:px-8 relative"
           >
+            <div className="absolute inset-0 bg-gradient-to-b from-orange-500/5 via-purple-500/5 to-blue-500/5" />
             <div className="max-w-7xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {stats.map((stat, index) => (
                   <motion.div
                     key={index}
                     variants={itemVariants}
-                    className="relative group p-6 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 transition-all duration-300"
+                    whileHover={{ 
+                      scale: 1.05,
+                      rotateY: 5,
+                      rotateX: 5
+                    }}
+                    className="relative group perspective"
                   >
-                    <stat.icon className="h-12 w-12 text-primary-400 mb-4" />
-                    <h3 className="text-4xl font-bold text-white mb-2">{stat.number}</h3>
-                    <p className="text-gray-400">{stat.label}</p>
-                    <div className="absolute inset-0 bg-primary-500/10 rounded-xl scale-0 group-hover:scale-100 transition-transform duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 via-purple-500/20 to-blue-500/20 rounded-2xl blur-xl transform group-hover:scale-110 transition-transform duration-300" />
+                    <div className="relative p-8 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 transform transition-all duration-300">
+                      <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                      <stat.icon className="h-12 w-12 text-orange-400 mb-4 transform group-hover:scale-110 transition-transform duration-300" />
+                      <h3 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-purple-400 to-blue-400 mb-2">
+                        {stat.number}
+                      </h3>
+                      <p className="text-gray-300 font-medium">{stat.label}</p>
+                    </div>
                   </motion.div>
                 ))}
               </div>
             </div>
           </motion.section>
 
-          {/* Services Grid */}
+          {/* Services Section with 3D Cards */}
           <motion.section
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={containerVariants}
-            className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900/50"
+            className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
           >
-            <div className="max-w-7xl mx-auto">
-              <motion.h2 
+            <div className="absolute inset-0 bg-gradient-to-b from-orange-900/20 via-purple-900/20 to-blue-900/20 pointer-events-none" />
+            
+            {/* Animated Background Elements */}
+            <motion.div
+              animate={{
+                rotate: [0, 360],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] opacity-30 pointer-events-none"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 via-purple-500/20 to-blue-500/20 rounded-full blur-3xl transform rotate-45" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-orange-500/20 rounded-full blur-3xl transform -rotate-45" />
+            </motion.div>
+
+            <div className="max-w-7xl mx-auto relative">
+              <motion.div
                 variants={itemVariants}
-                className="text-3xl md:text-4xl font-bold text-white text-center mb-12"
+                className="text-center mb-16"
               >
-                Our Services
-              </motion.h2>
+                <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-purple-400 to-blue-400 mb-6">
+                  Our Services
+                </h2>
+                <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+                  Empowering your digital journey with cutting-edge solutions
+                </p>
+              </motion.div>
+              
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <motion.div
                   variants={itemVariants}
-                  whileHover={{ scale: 1.05 }}
-                  className="p-6 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 transition-all duration-300"
+                  whileHover={{ 
+                    scale: 1.03,
+                    rotateY: 5,
+                    rotateX: 5
+                  }}
+                  className="group relative perspective"
                 >
-                  <CloudArrowUpIcon className="h-12 w-12 text-primary-400 mb-4" />
-                  <h3 className="text-xl font-semibold text-white mb-2">Cloud Solutions</h3>
-                  <p className="text-gray-400">Scalable cloud infrastructure and deployment</p>
+                  <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-purple-500/20 rounded-2xl blur-xl transform group-hover:scale-110 transition-transform duration-300" />
+                  <div className="relative p-8 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-orange-500/50 transition-all duration-300">
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                    <CloudArrowUpIcon className="h-12 w-12 text-orange-400 mb-6 transform group-hover:scale-110 transition-transform duration-300" />
+                    <h3 className="text-2xl font-semibold text-white mb-4">Cloud Solutions</h3>
+                    <p className="text-gray-300">Scale your infrastructure with our cutting-edge cloud solutions and seamless deployment strategies.</p>
+                  </div>
                 </motion.div>
 
                 <motion.div
                   variants={itemVariants}
-                  whileHover={{ scale: 1.05 }}
-                  className="p-6 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 transition-all duration-300"
+                  whileHover={{ 
+                    scale: 1.03,
+                    rotateY: 5,
+                    rotateX: 5
+                  }}
+                  className="group relative perspective"
                 >
-                  <CpuChipIcon className="h-12 w-12 text-primary-400 mb-4" />
-                  <h3 className="text-xl font-semibold text-white mb-2">AI & Machine Learning</h3>
-                  <p className="text-gray-400">Intelligent solutions for your business</p>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-2xl blur-xl transform group-hover:scale-110 transition-transform duration-300" />
+                  <div className="relative p-8 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300">
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                    <CpuChipIcon className="h-12 w-12 text-purple-400 mb-6 transform group-hover:scale-110 transition-transform duration-300" />
+                    <h3 className="text-2xl font-semibold text-white mb-4">AI & Machine Learning</h3>
+                    <p className="text-gray-300">Harness the power of artificial intelligence to transform your business processes and decision-making.</p>
+                  </div>
                 </motion.div>
 
                 <motion.div
                   variants={itemVariants}
-                  whileHover={{ scale: 1.05 }}
-                  className="p-6 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 transition-all duration-300"
+                  whileHover={{ 
+                    scale: 1.03,
+                    rotateY: 5,
+                    rotateX: 5
+                  }}
+                  className="group relative perspective"
                 >
-                  <BeakerIcon className="h-12 w-12 text-primary-400 mb-4" />
-                  <h3 className="text-xl font-semibold text-white mb-2">R&D Services</h3>
-                  <p className="text-gray-400">Innovative research and development</p>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-orange-500/20 rounded-2xl blur-xl transform group-hover:scale-110 transition-transform duration-300" />
+                  <div className="relative p-8 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-blue-500/50 transition-all duration-300">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                    <BeakerIcon className="h-12 w-12 text-blue-400 mb-6 transform group-hover:scale-110 transition-transform duration-300" />
+                    <h3 className="text-2xl font-semibold text-white mb-4">R&D Services</h3>
+                    <p className="text-gray-300">Push the boundaries of innovation with our research and development expertise.</p>
+                  </div>
                 </motion.div>
               </div>
             </div>
@@ -266,35 +386,50 @@ const Home = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={containerVariants}
-            className="py-20 px-4 sm:px-6 lg:px-8"
+            className="py-24 px-4 sm:px-6 lg:px-8 relative"
           >
             <div className="max-w-7xl mx-auto">
-              <motion.h2
+              <motion.div
                 variants={itemVariants}
-                className="text-3xl md:text-4xl font-bold text-white text-center mb-12"
+                className="text-center mb-16"
               >
-                Featured Projects
-              </motion.h2>
+                <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 mb-6">
+                  Featured Projects
+                </h2>
+                <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+                  Discover our latest work and innovative solutions
+                </p>
+              </motion.div>
+              
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {featuredProjects.map((project, index) => (
                   <motion.div
                     key={index}
                     variants={itemVariants}
-                    whileHover={{ scale: 1.05 }}
-                    className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm p-6 hover:bg-white/10 transition-all duration-300"
+                    whileHover={{ scale: 1.03 }}
+                    className="group relative"
                   >
-                    <div className="aspect-w-16 aspect-h-9 mb-4 overflow-hidden rounded-lg">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-300"
-                      />
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-2xl blur-xl transform group-hover:scale-110 transition-transform duration-300" />
+                    <div className="relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-purple-500/50 transition-colors duration-300">
+                      <div className="aspect-w-16 aspect-h-9 overflow-hidden">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700"
+                        />
+                      </div>
+                      <div className="p-6">
+                        <span className="inline-block px-3 py-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 rounded-full text-sm font-medium mb-4">
+                          {project.category}
+                        </span>
+                        <h3 className="text-2xl font-semibold text-white mb-3">{project.title}</h3>
+                        <p className="text-gray-300 mb-4">{project.description}</p>
+                        <button className="text-purple-400 hover:text-purple-300 transition-colors duration-300 flex items-center">
+                          Learn More
+                          <ArrowRightIcon className="w-4 h-4 ml-2" />
+                        </button>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
-                    <p className="text-gray-400 mb-4">{project.description}</p>
-                    <span className="inline-block px-3 py-1 bg-primary-500/20 text-primary-300 rounded-full text-sm">
-                      {project.category}
-                    </span>
                   </motion.div>
                 ))}
               </div>
@@ -305,36 +440,9 @@ const Home = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={containerVariants}
-            className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+            className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
           >
-            <div className="max-w-3xl mx-auto text-center relative z-10">
-              <motion.div
-                variants={itemVariants}
-                className="bg-white/5 backdrop-blur-md p-8 md:p-12 rounded-2xl"
-              >
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                  Stay Updated
-                </h2>
-                <p className="text-gray-300 mb-8">
-                  Subscribe to our newsletter for the latest tech insights and updates.
-                </p>
-                <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-4">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="flex-1 px-6 py-3 bg-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500"
-                  />
-                  <button
-                    type="submit"
-                    className="px-8 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transform transition hover:scale-105"
-                  >
-                    Subscribe
-                  </button>
-                </form>
-              </motion.div>
-            </div>
-            {/* Decorative background elements */}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 -z-10" />
+            {/* Animated background elements */}
             <motion.div
               animate={{
                 rotate: 360,
@@ -345,8 +453,44 @@ const Home = () => {
                 repeat: Infinity,
                 ease: "linear"
               }}
-              className="absolute -top-1/2 -right-1/2 w-full h-full bg-primary-500/10 rounded-full blur-3xl"
-            />
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px]"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 rounded-full blur-3xl transform rotate-45" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-3xl transform -rotate-45" />
+            </motion.div>
+
+            <div className="max-w-4xl mx-auto relative">
+              <motion.div
+                variants={itemVariants}
+                className="relative bg-white/5 backdrop-blur-xl p-8 md:p-12 rounded-2xl border border-white/10"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-2xl" />
+                <div className="relative">
+                  <h2 className="text-3xl md:text-4xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 mb-4">
+                    Stay Updated
+                  </h2>
+                  <p className="text-gray-300 text-center mb-8">
+                    Subscribe to our newsletter for the latest tech insights and updates.
+                  </p>
+                  <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-4">
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      className="flex-1 px-6 py-4 bg-white/10 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white/15 transition-all duration-300"
+                    />
+                    <button
+                      type="submit"
+                      className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold transform transition hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
+                    >
+                      Subscribe
+                    </button>
+                  </form>
+                  <p className="text-gray-400 text-sm text-center mt-4">
+                    We respect your privacy. Unsubscribe at any time.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
           </motion.section>
         </>
       )}

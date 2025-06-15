@@ -126,12 +126,11 @@ const Cart = () => {
                                 <motion.p layout className="mt-1 text-sm text-gray-500 dark:text-gray-400">
                                     {item.category}
                                 </motion.p>
-                                <motion.div layout className="mt-2 flex items-center justify-between">
-                                    <span className="text-lg font-medium text-primary-600 dark:text-primary-400">
+                                <motion.div layout className="mt-2 flex items-center justify-between">                                    <span className="text-lg font-medium text-primary-600 dark:text-primary-400">
                                         ${parseFloat(item.price || 0).toFixed(2)}
+                                        {item.priceRange?.includes('/month') && '/month'}
                                     </span>
-                                    {item.quantity !== undefined && (
-                                        <div className="flex items-center space-x-2">
+                                    <div className="flex items-center space-x-2">
                                             <motion.button
                                                 whileHover={{ scale: 1.1 }}
                                                 whileTap={{ scale: 0.9 }}

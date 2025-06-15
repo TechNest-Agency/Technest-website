@@ -1,33 +1,21 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext } from 'react';
 
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-    const [isDarkMode, setIsDarkMode] = useState(() => {
-        const savedTheme = localStorage.getItem('theme');
-        return savedTheme ? savedTheme === 'dark' : false;
-    });
-
-    useEffect(() => {
-        // Update localStorage
-        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-        
-        // Update document class
-        if (isDarkMode) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    }, [isDarkMode]);
-
-    const toggleTheme = () => {
-        setIsDarkMode(prev => !prev);
-    };
-
+    // Modern theme colors and effects are now handled through Tailwind classes
     const value = {
-        isDarkMode,
-        toggleTheme,
-        setIsDarkMode
+        colors: {
+            primary: {
+                light: 'from-primary-400',
+                dark: 'to-primary-600',
+            },
+            secondary: {
+                light: 'from-secondary-400',
+                dark: 'to-secondary-600',
+            },
+            accent: 'to-secondary-400',
+        }
     };
 
     return (
