@@ -58,19 +58,7 @@ const TeamMembers = () => {
         github: '#'
       }
     },
-        {
-      name: 'Nusrat Jahan Mim',
-      role: 'UI/UX Designer',
-      image: '/mim.png',
-      bio: 'Innovative UI/UX designer with a passion for creating intuitive user experiences.',
-      expertise: ['UI/UX Design', 'Prototyping', 'User Research'],
-      social: {
-        linkedin: '#',
-        twitter: '#',
-        github: '#'
-      }
-    },
-    
+
     {
       name: 'Nure Jannat Mim',
       role: 'Digital Marketing Specialist',
