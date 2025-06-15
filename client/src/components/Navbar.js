@@ -95,7 +95,7 @@ const Navbar = () => {
                         </motion.div>
                         
                         {/* Desktop Navigation */}
-                        <div className="hidden md:flex items-center space-x-1">
+                        <div className="hidden md:flex items-center space-x-2 lg:space-x-4">
                             {navigationLinks.map(link => (
                                 <NavLink key={link.to} {...link} />
                             ))}
@@ -103,7 +103,9 @@ const Navbar = () => {
                     </div>
 
                     <div className="flex items-center space-x-2">
-                        <Search />
+                        <div className="hidden sm:block w-auto lg:w-64">
+                            <Search />
+                        </div>
 
                         {/* Shopping Cart */}
                         <motion.button
@@ -171,11 +173,11 @@ const Navbar = () => {
                                 onClick={() => setIsMenuOpen(false)}
                             />
                             <motion.div
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
                                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                className="absolute top-full left-0 right-0 md:hidden bg-gray-900/95 backdrop-blur-xl border-t border-white/10 shadow-lg shadow-black/20"
+                                className="absolute top-full left-0 right-0 md:hidden bg-gray-900/95 backdrop-blur-xl border-t border-white/10 shadow-lg shadow-black/20 max-h-[80vh] overflow-y-auto"
                             >
                                 <motion.div 
                                     initial="hidden"
@@ -189,19 +191,28 @@ const Navbar = () => {
                                             }
                                         }
                                     }}
-                                    className="px-4 py-4 space-y-2"
+                                    className="px-4 py-4 space-y-4"
                                 >
-                                    {navigationLinks.map(link => (
-                                        <motion.div
-                                            key={link.to}
-                                            variants={{
-                                                hidden: { opacity: 0, y: 20 },
-                                                visible: { opacity: 1, y: 0 }
-                                            }}
-                                        >
-                                            <MobileNavLink {...link} />
-                                        </motion.div>
-                                    ))}
+                                    {/* Mobile Search */}
+                                    <div className="sm:hidden mb-2">
+                                        <Search />
+                                    </div>
+
+                                    {/* Navigation Links */}
+                                    <div className="space-y-1">
+                                        {navigationLinks.map(link => (
+                                            <motion.div
+                                                key={link.to}
+                                                variants={{
+                                                    hidden: { opacity: 0, y: 20 },
+                                                    visible: { opacity: 1, y: 0 }
+                                                }}
+                                                onClick={() => setIsMenuOpen(false)}
+                                            >
+                                                <MobileNavLink {...link} />
+                                            </motion.div>
+                                        ))}
+                                    </div>
                                 </motion.div>
                             </motion.div>
                         </>
