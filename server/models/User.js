@@ -45,7 +45,14 @@ const userSchema = new mongoose.Schema({
     default: 0,
   },
   lockUntil: Date,
-  twoFactorEnabled: { type: Boolean, default: false },
+  twoFactorSecret: {
+    type: String,
+    default: null,
+  },
+  twoFactorEnabled: {
+    type: Boolean,
+    default: false,
+  },
   twoFactorCode: { type: String },
   twoFactorCodeExpires: { type: Date },
 });

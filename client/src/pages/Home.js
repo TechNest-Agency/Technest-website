@@ -15,10 +15,19 @@ import {
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Auto-rotate testimonials
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   const technologies = [
@@ -51,10 +60,58 @@ const Home = () => {
     }
   ];
 
+  const testimonials = [
+    {
+      name: "Sarah Johnson",
+      role: "CEO at TechCorp",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+      quote: "TechNest transformed our digital presence. Their innovative solutions helped us achieve a 200% growth in user engagement."
+    },
+    {
+      name: "Michael Chen",
+      role: "CTO at InnovateTech",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+      quote: "The team's expertise in modern web technologies and AI integration is remarkable. They delivered beyond our expectations."
+    },
+    {
+      name: "Emma Williams",
+      role: "Product Manager at StartupX",
+      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956",
+      quote: "Working with TechNest was a game-changer. Their attention to detail and innovative approach set them apart."
+    }
+  ];
+
+  const features = [
+    {
+      title: "AI-Powered Solutions",
+      description: "Leverage cutting-edge artificial intelligence to transform your business processes",
+      icon: CpuChipIcon,
+      color: "from-purple-500 to-indigo-500"
+    },
+    {
+      title: "Cloud Integration",
+      description: "Seamlessly integrate and scale your applications with modern cloud infrastructure",
+      icon: CloudArrowUpIcon,
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      title: "Custom Development",
+      description: "Tailored software solutions designed specifically for your business needs",
+      icon: CodeBracketIcon,
+      color: "from-green-500 to-emerald-500"
+    },
+    {
+      title: "Innovation Lab",
+      description: "Access to our innovation lab for emerging technology experiments",
+      icon: BeakerIcon,
+      color: "from-orange-500 to-amber-500"
+    }
+  ];
+
   const stats = [
-    { number: '100+', label: 'Projects Completed', icon: CodeBracketIcon },
-    { number: '50+', label: 'Happy Clients', icon: UserGroupIcon },
-    { number: '15+', label: 'Awards Won', icon: TrophyIcon },
+    { number: "98%", label: "Client Satisfaction", icon: TrophyIcon },
+    { number: "24/7", label: "Support Available", icon: UserGroupIcon },
+    { number: "100+", label: "Projects Delivered", icon: SparklesIcon }
   ];
 // Stats data
 

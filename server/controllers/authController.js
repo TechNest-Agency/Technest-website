@@ -98,49 +98,68 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Check if email and password are provided
-    if (!email || !password) {
-      return res
-        .status(400)
-        .json({ message: "Email and password are required" });
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({
+        status: false,
+        message: "Please enter a valid email address",
+      });
     }
 
     // Find user by email
-    const user = await User.findOne({ email });
-
+    const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
-      return res.status(401).json({ message: "Invalid email" });
+      return res.status(401).json({
+        status: false,
+        message: "Invalid email or password",
+      });
     }
 
-    // Compare passwords
-    const isMatch = await bcrypt.compare(password, user.password);
-
-    if (!isMatch) {
-      return res.status(401).json({ message: "Invalid password" });
+    // Check password
+    const isValidPassword = await bcrypt.compare(password, user.password);
+    if (!isValidPassword) {
+      return res.status(401).json({
+        status: false,
+        message: "Invalid email or password",
+      });
     }
 
-    // Setup 2FA (optional based on your requirements)
-    const code = crypto.randomInt(100000, 999999).toString();
-    const expires = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes from now
+    // Generate 2FA code
+    const twoFactorCode = Math.floor(100000 + Math.random() * 900000).toString();
+    const twoFactorCodeExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
-    // Update user with 2FA code and expiry
-    user.twoFactorCode = code;
-    user.twoFactorCodeExpires = expires;
-
+    user.twoFactorCode = twoFactorCode;
+    user.twoFactorCodeExpires = twoFactorCodeExpires;
     await user.save();
 
-    // Send email
+    // Send verification code via email
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: user.email,
-      subject: "Your 2FA Code",
-      text: `Your verification code is: ${code}. It will expire in 5 minutes.`,
+      subject: "Your TechNest Login Verification Code",
+      html: `
+        <h2>Welcome to TechNest</h2>
+        <p>Your verification code is: <strong>${twoFactorCode}</strong></p>
+        <p>This code will expire in 10 minutes.</p>
+      `,
     });
 
-    res.json({ status: true, message: "Login Successfull", user });
+    res.json({
+      status: true,
+      message: "Verification code sent to your email",
+      user: {
+        id: user._id,
+        email: user.email,
+        role: user.role,
+      },
+    });
   } catch (error) {
     console.error("Login error:", error);
-    res.status(500).json({ message: "Server error during login" });
+    res.status(500).json({
+      status: false,
+      message: "An error occurred during login. Please try again.",
+    });
   }
 };
 

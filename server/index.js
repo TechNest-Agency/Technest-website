@@ -3,9 +3,15 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
+const connectDB = require('./config/database');
 
 // Initialize express app
 const app = express();
+
+// Connect to MongoDB
+connectDB().catch(err => {
+    console.error('Could not connect to MongoDB:', err);
+});
 
 // Basic middleware
 app.use(express.json());

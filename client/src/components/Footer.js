@@ -34,7 +34,7 @@ const Footer = () => {
 
     const contactInfo = [
         { icon: EnvelopeIcon, text: 'contact@technest.com' },
-        { icon: PhoneIcon, text: '+880 1234-567890' },
+        { icon: PhoneIcon, text: '+880 1322-695162' },
         { icon: MapPinIcon, text: 'Dhaka, Bangladesh' },
         { icon: GlobeAltIcon, text: 'www.technest.com' }
     ];
