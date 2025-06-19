@@ -662,7 +662,7 @@ const Services = () => {
           variants={itemVariants}
           className="text-3xl font-bold text-white text-center mb-12"
         >
-          Why Choose TechNest
+          Why Choose CraftNest
         </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {whyChooseUs.map((item, index) => (

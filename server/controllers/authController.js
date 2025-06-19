@@ -137,9 +137,9 @@ exports.login = async (req, res) => {
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: user.email,
-      subject: "Your TechNest Login Verification Code",
+      subject: "Your CraftNetic Login Verification Code",
       html: `
-        <h2>Welcome to TechNest</h2>
+        <h2>Welcome to CraftNetic</h2>
         <p>Your verification code is: <strong>${twoFactorCode}</strong></p>
         <p>This code will expire in 10 minutes.</p>
       `,

@@ -33,10 +33,10 @@ const Footer = () => {
     };
 
     const contactInfo = [
-        { icon: EnvelopeIcon, text: 'contact@technest.com' },
+        { icon: EnvelopeIcon, text: 'contact@craftnest.agency' },
         { icon: PhoneIcon, text: '+880 1322-695162' },
         { icon: MapPinIcon, text: 'Dhaka, Bangladesh' },
-        { icon: GlobeAltIcon, text: 'www.technest.com' }
+        { icon: GlobeAltIcon, text: 'www.craftnest.agency' }
     ];
 
     const socialLinks = [
@@ -69,7 +69,7 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-16">
                     {/* Company Info */}
                     <div className="space-y-4">
-                        <img src="/logo.png" alt="TechNest Logo" className="h-8" />
+                        <img src="/logo.png" alt="CraftNest Logo" className="h-8" />
                         <p className="text-gray-400 mt-4">
                             Empowering businesses through innovative technology solutions and expert development services.
                         </p>
@@ -134,7 +134,7 @@ const Footer = () => {
                 <div className="border-t border-gray-800 py-8">
                     <div className="flex flex-col md:flex-row justify-between items-center">
                         <p className="text-gray-400 text-sm">
-                            © {currentYear} TechNest. All rights reserved.
+                            © {currentYear} CraftNest. All rights reserved.
                         </p>
                         <div className="flex space-x-6 mt-4 md:mt-0">
                             <Link to="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors duration-300">

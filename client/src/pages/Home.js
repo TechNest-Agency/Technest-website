@@ -77,7 +77,7 @@ const Home = () => {
       name: "Emma Williams",
       role: "Product Manager at StartupX",
       image: "https://images.unsplash.com/photo-1580489944761-15a19d654956",
-      quote: "Working with TechNest was a game-changer. Their attention to detail and innovative approach set them apart."
+      quote: "Working with CraftNest was a game-changer. Their attention to detail and innovative approach set them apart."
     }
   ];
 
@@ -166,6 +166,7 @@ const Home = () => {
             {/* 3D Background Elements */}
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute w-full h-full">
+
                 <motion.div
                   animate={{
                     rotateZ: 360,

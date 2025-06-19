@@ -1,7 +1,7 @@
 {
-  "name": "technest-server",
+  "name": "CRAFTNETIC-server",
   "version": "1.0.0",
-  "description": "Backend server for TechNest Solutions website",
+  "description": "Backend server for CRAFTNETIC Solutions website",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

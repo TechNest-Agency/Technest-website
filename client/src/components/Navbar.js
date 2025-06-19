@@ -89,7 +89,7 @@ const Navbar = () => {
                         >
                             <img 
                                 src="/logo.png" 
-                                alt="TechNest Logo" 
+                                alt="CraftNest Logo" 
                                 className="h-8 transition-transform"
                             />
                         </motion.div>

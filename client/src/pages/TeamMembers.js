@@ -158,7 +158,7 @@ const TeamMembers = () => {
   return (
     <PageLayout
       title="Our Team"
-      subtitle="Meet the Innovators Behind TechNest"
+      subtitle="Meet the Innovators Behind CraftNest"
     >
       {/* Team Stats */}
       <motion.section

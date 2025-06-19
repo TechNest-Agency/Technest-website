@@ -31,7 +31,7 @@ const About = () => {
     {
       year: '2024',
       title: 'Company Founded',
-      description: 'TechNest Solutions was established with a vision to revolutionize digital transformation.'
+      description: 'CrafNest Solutions was established with a vision to revolutionize digital transformation.'
     },
     {
       year: '2024 Q2',
@@ -234,7 +234,7 @@ const About = () => {
 
   return (
     <PageLayout
-      title="About TechNest"
+      title="About CraftNest"
       subtitle="Pioneering Digital Excellence Through Innovation and Expertise"
     >
       {/* Mission & Vision */}

@@ -99,14 +99,14 @@ router.post('/', [
         await transporter.sendMail({
             from: process.env.SMTP_FROM,
             to: email,
-            subject: 'Thank you for contacting TechNest Solutions',
+            subject: 'Thank you for contacting CRAFTNETIC Solutions',
             html: `
-                <h2>Thank you for contacting TechNest Solutions</h2>
+                <h2>Thank you for contacting CRAFTNETIC Solutions</h2>
                 <p>Dear ${name},</p>
                 <p>We have received your message and will get back to you shortly.</p>
                 <p>Here's a copy of your message:</p>
                 <blockquote>${message}</blockquote>
-                <p>Best regards,<br>TechNest Solutions Team</p>
+                <p>Best regards,<br>CRAFTNETIC Solutions Team</p>
             `
         });
 
@@ -199,7 +199,7 @@ router.post('/:id/reply', [auth, adminAuth], async (req, res) => {
                 <h2>Re: ${message.subject}</h2>
                 <p>Dear ${message.name},</p>
                 <p>${reply}</p>
-                <p>Best regards,<br>TechNest Solutions Team</p>
+                <p>Best regards,<br>CRAFTNETIC Solutions Team</p>
             `
         });
 

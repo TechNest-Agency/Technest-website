@@ -43,19 +43,19 @@ const Contact = () => {
     {
       icon: PhoneIcon,
       title: 'Call Us',
-      content: '+1 (555) 123-4567',
-      link: 'tel:+15551234567'
+      content: '+880 1322-695162',
+      link: 'tel:+880 1322-695162'
     },
     {
       icon: EnvelopeIcon,
       title: 'Email Us',
-      content: 'contact@technest.com',
-      link: 'mailto:contact@technest.com'
+      content: 'contact@craftnest.agency',
+      link: 'mailto:contact@crafnest.agency'
     },
     {
       icon: MapPinIcon,
       title: 'Visit Us',
-      content: '123 Innovation Street, Tech City, TC 12345',
+      content: 'Dhaka,Bangladesh',
       link: 'https://maps.google.com'
     },
     {
