@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
@@ -16,7 +17,7 @@ const PaymentStatus = () => {
   }, [isSuccess, clearCart]);
 
   return (
-    <div className="min-h-screen py-12 bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-white">
       <div className="container max-w-3xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

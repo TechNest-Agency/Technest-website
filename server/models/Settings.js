@@ -5,7 +5,7 @@ const settingsSchema = new mongoose.Schema({
         title: {
             type: String,
             required: true,
-            default: 'TechNest Solutions'
+            default: 'LaunchLayer Solutions'
         },
         description: {
             type: String,
@@ -58,7 +58,7 @@ const settingsSchema = new mongoose.Schema({
         email: {
             type: String,
             required: true,
-            default: 'contact@technest.com'
+            default: 'contact@launchlayer.com'
         },
         phone: String,
         address: String,

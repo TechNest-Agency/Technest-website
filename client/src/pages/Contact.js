@@ -49,8 +49,8 @@ const Contact = () => {
     {
       icon: EnvelopeIcon,
       title: 'Email Us',
-      content: 'contact@craftnest.agency',
-      link: 'mailto:contact@crafnest.agency'
+      content: 'contact@launchlayer.agency',
+      link: 'mailto:contact@launchlayer.agency'
     },
     {
       icon: MapPinIcon,
@@ -92,7 +92,7 @@ const Contact = () => {
       title="Contact Us"
       subtitle="Let's Start a Conversation"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div className="min-h-screen bg-black grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Contact Information */}
         <motion.div
           initial="hidden"
@@ -105,14 +105,14 @@ const Contact = () => {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ scale: 1.02 }}
-                className="p-6 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 transition-all duration-300"
+                className="p-6 bg-black border border-gray-700 rounded-xl hover:bg-gray-900 transition-all duration-300"
               >
-                <info.icon className="h-8 w-8 text-primary-400 mb-4" />
+                <info.icon className="h-8 w-8 text-primary-500 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">{info.title}</h3>
                 {info.link ? (
                   <a
                     href={info.link}
-                    className="text-gray-300 hover:text-primary-400 transition-colors"
+                    className="text-gray-300 hover:text-primary-500 transition-colors"
                   >
                     {info.content}
                   </a>
@@ -126,18 +126,18 @@ const Contact = () => {
           {/* Additional Information */}
           <motion.div
             variants={itemVariants}
-            className="mt-12 p-6 bg-white/5 backdrop-blur-sm rounded-xl"
+            className="mt-12 p-6 bg-black border border-gray-700 rounded-xl"
           >
             <h3 className="text-2xl font-bold text-white mb-4">
               Why Choose Direct Contact?
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start">
-                <ChatBubbleLeftRightIcon className="h-6 w-6 text-primary-400 mt-1 mr-3" />
+                <ChatBubbleLeftRightIcon className="h-6 w-6 text-primary-500 mt-1 mr-3" />
                 <p className="text-gray-300">Get personalized solutions tailored to your needs</p>
               </li>
               <li className="flex items-start">
-                <ClockIcon className="h-6 w-6 text-primary-400 mt-1 mr-3" />
+                <ClockIcon className="h-6 w-6 text-primary-500 mt-1 mr-3" />
                 <p className="text-gray-300">Quick response time with dedicated support</p>
               </li>
             </ul>
@@ -154,11 +154,11 @@ const Contact = () => {
           <motion.form
             variants={itemVariants}
             onSubmit={handleSubmit}
-            className="p-8 bg-white/5 backdrop-blur-md rounded-2xl relative overflow-hidden"
+            className="p-8 bg-white border border-gray-200 rounded-2xl relative overflow-hidden"
           >
             <div className="space-y-6">
               <div>
-                <label className="block text-white mb-2" htmlFor="name">
+                <label className="block text-gray-900 mb-2" htmlFor="name">
                   Your Name
                 </label>
                 <input
@@ -167,14 +167,14 @@ const Contact = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-3 bg-gray-50 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-300 border border-gray-200"
                   placeholder="John Doe"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-white mb-2" htmlFor="email">
+                <label className="block text-gray-900 mb-2" htmlFor="email">
                   Email Address
                 </label>
                 <input
@@ -183,14 +183,14 @@ const Contact = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-3 bg-gray-50 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-300 border border-gray-200"
                   placeholder="john@example.com"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-white mb-2" htmlFor="subject">
+                <label className="block text-gray-900 mb-2" htmlFor="subject">
                   Subject
                 </label>
                 <input
@@ -199,14 +199,14 @@ const Contact = () => {
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-3 bg-gray-50 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-300 border border-gray-200"
                   placeholder="How can we help?"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-white mb-2" htmlFor="message">
+                <label className="block text-gray-900 mb-2" htmlFor="message">
                   Message
                 </label>
                 <textarea
@@ -215,7 +215,7 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   rows="4"
-                  className="w-full px-4 py-3 bg-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-3 bg-gray-50 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-300 border border-gray-200"
                   placeholder="Tell us about your project..."
                   required
                 />
@@ -228,8 +228,8 @@ const Contact = () => {
                 disabled={isSubmitting}
                 className={`w-full py-4 rounded-lg flex items-center justify-center text-white transition-all duration-300
                   ${isSubmitting
-                    ? 'bg-gray-500 cursor-not-allowed'
-                    : 'bg-primary-500 hover:bg-primary-600'
+                    ? 'bg-gray-300 cursor-not-allowed'
+                    : 'bg-gradient-to-r from-primary-400 to-secondary-400 hover:from-primary-300 hover:to-secondary-300'
                   }`}
               >
                 {isSubmitting ? (
@@ -252,19 +252,19 @@ const Contact = () => {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-4 p-4 bg-green-500/20 text-green-400 rounded-lg"
+                className="mt-4 p-4 bg-green-100 text-green-700 rounded-lg"
               >
                 Thank you for your message! We'll get back to you soon.
               </motion.div>
             )}
 
             {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 -z-10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary-50/40 to-secondary-100/40 -z-10" />
           </motion.form>
 
           {/* Decorative Elements */}
-          <div className="absolute -top-12 -right-12 w-24 h-24 bg-primary-500/30 rounded-full blur-2xl" />
-          <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-secondary-500/30 rounded-full blur-2xl" />
+          <div className="absolute -top-12 -right-12 w-24 h-24 bg-primary-100/30 rounded-full blur-2xl" />
+          <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-secondary-100/30 rounded-full blur-2xl" />
         </motion.div>
       </div>
     </PageLayout>

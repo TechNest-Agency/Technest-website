@@ -323,9 +323,9 @@ router.post('/users', [
         await transporter.sendMail({
             from: process.env.SMTP_FROM,
             to: email,
-            subject: 'Your CRAFTNETIC Solutions Account',
+            subject: 'Your LaunchLayer Solutions Account',
             html: `
-                <h2>Welcome to CRAFTNETIC Solutions!</h2>
+                <h2>Welcome to LaunchLayer Solutions!</h2>
                 <p>Your account has been created with the following credentials:</p>
                 <p>Username: ${username}</p>
                 <p>Password: ${password}</p>

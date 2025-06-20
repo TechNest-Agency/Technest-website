@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-    Bars3Icon, 
-    XMarkIcon, 
+import {
+    Bars3Icon,
+    XMarkIcon,
     ShoppingCartIcon,
-    UserCircleIcon
+    UserCircleIcon,
+    MagnifyingGlassIcon
 } from "@heroicons/react/24/outline";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
-import Search from "./Search";
 
 const Navbar = () => {
     const { user } = useAuth();
@@ -31,6 +31,8 @@ const Navbar = () => {
         navigate("/");
     };
 
+    const handleMenuLinkClick = () => setIsMenuOpen(false);
+
     const navigationLinks = [
         { to: "/", text: "Home" },
         { to: "/about", text: "About" },
@@ -46,9 +48,10 @@ const Navbar = () => {
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
         >
-            <Link 
-                to={to} 
-                className="relative px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white transition-all duration-300 overflow-hidden group"
+            <Link
+                to={to}
+                className="relative px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-primary-600 transition-all duration-300 overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary-400"
+                tabIndex={0}
             >
                 <span className="relative z-10">{text}</span>
                 <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary-500/0 via-primary-500/0 to-primary-500/0 group-hover:from-primary-500/10 group-hover:via-primary-500/20 group-hover:to-primary-500/10 transition-all duration-300 rounded-lg transform group-hover:scale-110" />
@@ -60,9 +63,11 @@ const Navbar = () => {
         <motion.div
             whileTap={{ scale: 0.95 }}
         >
-            <Link 
-                to={to} 
-                className="block px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white transition-all duration-300 relative overflow-hidden group"
+            <Link
+                to={to}
+                className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-primary-600 transition-all duration-300 relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary-400"
+                tabIndex={0}
+                onClick={handleMenuLinkClick}
             >
                 <span className="relative z-10">{text}</span>
                 <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary-500/0 via-primary-500/0 to-primary-500/0 group-hover:from-primary-500/10 group-hover:via-primary-500/20 group-hover:to-primary-500/10 transition-all duration-300" />
@@ -71,29 +76,26 @@ const Navbar = () => {
     );
 
     return (
-        <nav 
+        <nav
             className={`fixed w-full z-50 transition-all duration-300 ${
                 scrollPosition > 0
-                    ? "bg-gray-900/90 backdrop-blur-lg shadow-lg shadow-primary-500/5"
-                    : "bg-gray-900/50 backdrop-blur-sm"
+                    ? "bg-white/90 backdrop-blur-lg shadow-lg shadow-primary-100/10"
+                    : "bg-white/70 backdrop-blur-sm"
             }`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16">
                     <div className="flex items-center">
-                        <motion.div 
+                        <motion.div
                             onClick={handleLogoClick}
                             className="flex items-center cursor-pointer mr-8"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            <img 
-                                src="/logo.png" 
-                                alt="CraftNest Logo" 
-                                className="h-8 transition-transform"
-                            />
+                            <span className="text-2xl font-extrabold text-black tracking-tight select-none" style={{ fontFamily: 'Garamond, serif' }}>
+                                LaunchLayer
+                            </span>
                         </motion.div>
-                        
                         {/* Desktop Navigation */}
                         <div className="hidden md:flex items-center space-x-2 lg:space-x-4">
                             {navigationLinks.map(link => (
@@ -101,56 +103,53 @@ const Navbar = () => {
                             ))}
                         </div>
                     </div>
-
                     <div className="flex items-center space-x-2">
-                        <div className="hidden sm:block w-auto lg:w-64">
-                            <Search />
-                        </div>
-
+                        {/* Search Icon Only */}
+                        <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="p-2 rounded-lg text-gray-700 hover:text-primary-600 hover:bg-primary-100 transition-all duration-300"
+                            aria-label="Search"
+                        >
+                            <MagnifyingGlassIcon className="h-6 w-6" />
+                        </motion.button>
                         {/* Shopping Cart */}
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => setIsCartOpen(true)}
-                            className="relative p-2 rounded-lg text-gray-300 hover:text-white hover:bg-primary-500/10 transition-all duration-300"
+                            className="relative p-2 rounded-lg text-gray-700 hover:text-primary-600 hover:bg-primary-100 transition-all duration-300"
                         >
                             <ShoppingCartIcon className="h-6 w-6" />
                             {getCartCount() > 0 && (
                                 <motion.span
                                     initial={{ scale: 0 }}
                                     animate={{ scale: 1 }}
-                                    className="absolute -top-1 -right-1 bg-gradient-to-r from-primary-500 to-secondary-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center shadow-glow"
+                                    className="absolute -top-1 -right-1 bg-gradient-to-r from-primary-400 to-secondary-400 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center shadow-glow"
                                 >
                                     {getCartCount()}
                                 </motion.span>
                             )}
                         </motion.button>
-
                         {/* User Menu */}
-                        {user ? (
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => navigate("/profile")}
-                                className="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-primary-500/10 transition-all duration-300"
-                            >
-                                <UserCircleIcon className="h-6 w-6" />
-                            </motion.button>
-                        ) : (
-                            <Link 
-                                to="/login"
-                                className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-4 py-2 rounded-lg font-medium hover:shadow-lg hover:shadow-primary-500/20 transition-all duration-300"
-                            >
-                                Sign In
-                            </Link>
-                        )}
-
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => user ? navigate("/profile") : navigate("/login")}
+                            className={`p-2 rounded-lg ${user ? 'text-gray-700 hover:text-primary-600 hover:bg-primary-100' : 'text-gray-700 hover:text-primary-600 hover:bg-primary-100'} transition-all duration-300`}
+                            aria-label={user ? 'Profile' : 'Sign In'}
+                        >
+                            <UserCircleIcon className="h-6 w-6" />
+                        </motion.button>
                         {/* Mobile menu button */}
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="md:hidden p-2 rounded-lg text-gray-300 hover:text-white hover:bg-primary-500/10 transition-all duration-300"
+                            className="md:hidden p-2 rounded-lg text-gray-700 hover:text-primary-600 hover:bg-primary-100 transition-all duration-300"
+                            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+                            aria-expanded={isMenuOpen}
+                            aria-controls="mobile-menu"
                         >
                             {isMenuOpen ? (
                                 <XMarkIcon className="h-6 w-6" />
@@ -160,7 +159,6 @@ const Navbar = () => {
                         </motion.button>
                     </div>
                 </div>
-
                 {/* Mobile menu */}
                 <AnimatePresence>
                     {isMenuOpen && (
@@ -169,7 +167,7 @@ const Navbar = () => {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
-                                className="fixed inset-0 bg-black/20 backdrop-blur-sm md:hidden"
+                                className="fixed inset-0 bg-black/10 backdrop-blur-sm md:hidden"
                                 onClick={() => setIsMenuOpen(false)}
                             />
                             <motion.div
@@ -177,9 +175,12 @@ const Navbar = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -20 }}
                                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                className="absolute top-full left-0 right-0 md:hidden bg-gray-900/95 backdrop-blur-xl border-t border-white/10 shadow-lg shadow-black/20 max-h-[80vh] overflow-y-auto"
+                                className="absolute top-full left-0 right-0 md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-200 shadow-lg shadow-black/10 max-h-[80vh] overflow-y-auto"
+                                id="mobile-menu"
+                                role="menu"
+                                aria-label="Mobile navigation menu"
                             >
-                                <motion.div 
+                                <motion.div
                                     initial="hidden"
                                     animate="visible"
                                     variants={{
@@ -193,11 +194,17 @@ const Navbar = () => {
                                     }}
                                     className="px-4 py-4 space-y-4"
                                 >
-                                    {/* Mobile Search */}
-                                    <div className="sm:hidden mb-2">
-                                        <Search />
+                                    {/* Mobile Search Icon Only */}
+                                    <div className="sm:hidden mb-2 flex justify-end">
+                                        <motion.button
+                                            whileHover={{ scale: 1.1 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            className="p-2 rounded-lg text-gray-700 hover:text-primary-600 hover:bg-primary-100 transition-all duration-300"
+                                            aria-label="Search"
+                                        >
+                                            <MagnifyingGlassIcon className="h-6 w-6" />
+                                        </motion.button>
                                     </div>
-
                                     {/* Navigation Links */}
                                     <div className="space-y-1">
                                         {navigationLinks.map(link => (
@@ -212,6 +219,20 @@ const Navbar = () => {
                                                 <MobileNavLink {...link} />
                                             </motion.div>
                                         ))}
+                                        {/* Sign In Option for Mobile Menu */}
+                                        {!user && (
+                                            <motion.div
+                                                variants={{
+                                                    hidden: { opacity: 0, y: 20 },
+                                                    visible: { opacity: 1, y: 0 }
+                                                }}
+                                                onClick={() => { setIsMenuOpen(false); navigate('/login'); }}
+                                                className="flex items-center gap-2 px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-all duration-300 cursor-pointer mt-2"
+                                            >
+                                                <UserCircleIcon className="h-6 w-6" />
+                                                <span>Sign In</span>
+                                            </motion.div>
+                                        )}
                                     </div>
                                 </motion.div>
                             </motion.div>

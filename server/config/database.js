@@ -8,7 +8,7 @@ const connectDB = async () => {
             useUnifiedTopology: true,
             serverSelectionTimeoutMS: 10000,
             retryWrites: true,
-            dbName: 'technest'
+            dbName: 'launchlayer'
         });
 
         console.log(`MongoDB Connected: ${conn.connection.host}`);

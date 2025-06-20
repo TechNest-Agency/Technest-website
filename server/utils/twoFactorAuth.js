@@ -5,7 +5,7 @@ const { encrypt, decrypt } = require('./security');
 // Generate secret for 2FA
 exports.generateSecret = (email) => {
     const secret = speakeasy.generateSecret({
-        name: `TechNest:${email}`
+        name: `LaunchLayer:${email}`
     });
     return {
         base32: secret.base32,

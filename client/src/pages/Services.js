@@ -22,37 +22,11 @@ import {
   ShoppingCartIcon,
   EnvelopeIcon,
   BriefcaseIcon,
-  CheckIcon
 } from '@heroicons/react/24/outline';
-
-const pricingTiers = [
-  {
-    name: 'Basic',
-    price: '499',
-    features: ['Basic Web Development', 'Simple Cloud Setup', 'Standard Support'],
-    description: 'Perfect for small businesses',
-    popular: false
-  },
-  {
-    name: 'Professional',
-    price: '999',
-    features: ['Advanced Web Development', 'Cloud Infrastructure', '24/7 Support', 'Mobile App Development'],
-    description: 'Ideal for growing companies',
-    popular: true
-  },
-  {
-    name: 'Enterprise',
-    price: '1999',
-    features: ['Full Digital Transformation', 'Custom Solutions', 'Dedicated Support Team', 'AI Integration'],
-    description: 'For large organizations',
-    popular: false
-  }
-];
 
 const Services = () => {
   const { addToCart } = useCart();
   const [selectedTab, setSelectedTab] = useState('all');
-  const [hoveredCard, setHoveredCard] = useState(null);
 
   const services = [
     {
@@ -145,132 +119,6 @@ const Services = () => {
     }
   ];
 
-  const servicePackages = {
-    web: [
-      {
-        name: 'Starter',
-        description: 'Perfect for small businesses',
-        monthlyPrice: 999,
-        yearlyPrice: 9990,
-        features: [
-          'Single Page Website',
-          'Mobile Responsive',
-          'Basic SEO',
-          'Contact Form',
-          '3 Months Support',
-          'Basic Analytics'
-        ],
-        highlighted: false
-      },
-      {
-        name: 'Professional',
-        description: 'Ideal for growing companies',
-        monthlyPrice: 1999,
-        yearlyPrice: 19990,
-        features: [
-          'Multi-page Website',
-          'Advanced SEO',
-          'Content Management System',
-          'E-commerce Integration',
-          'Performance Optimization',
-          'Email Marketing Setup',
-          '6 Months Support',
-          'Advanced Analytics'
-        ],
-        highlighted: true
-      },
-      {
-        name: 'Enterprise',
-        description: 'For large organizations',
-        monthlyPrice: 3999,
-        yearlyPrice: 39990,
-        features: [
-          'Custom Web Application',
-          'Third-party Integrations',
-          'Premium SEO Package',
-          'Custom Features Development',
-          'Load Balancing Setup',
-          'Security Hardening',
-          '12 Months Support',
-          'Premium Analytics',
-          'Dedicated Account Manager'
-        ],
-        highlighted: false
-      }
-    ],
-    mobile: [
-      {
-        name: 'Basic',
-        description: 'Start your mobile presence',
-        monthlyPrice: 1499,
-        yearlyPrice: 14990,
-        features: [
-          'Single Platform (iOS/Android)',
-          'Basic Features',
-          'Standard UI Components',
-          'App Store Submission',
-          '3 Months Support',
-          'Crash Reporting'
-        ],
-        highlighted: false
-      },
-      {
-        name: 'Advanced',
-        description: 'Full-featured mobile app',
-        monthlyPrice: 2999,
-        yearlyPrice: 29990,
-        features: [
-          'Cross-platform Development',
-          'Custom UI/UX Design',
-          'Push Notifications',
-          'Social Integration',
-          'Analytics Integration',
-          'In-app Purchases',
-          '6 Months Support',
-          'Priority Bug Fixes'
-        ],
-        highlighted: true
-      },
-      {
-        name: 'Premium',
-        description: 'Enterprise mobile solution',
-        monthlyPrice: 5999,
-        yearlyPrice: 59990,
-        features: [
-          'Native Development',
-          'Custom Backend',
-          'Offline Support',
-          'Advanced Security',
-          'Third-party Integrations',
-          'Performance Optimization',
-          '12 Months Support',
-          'SLA Agreement',
-          'Dedicated Team'
-        ],
-        highlighted: false
-      }    ]
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
   const packages = [
     {
       title: "Enterprise Security Pack",
@@ -571,341 +419,347 @@ const Services = () => {
     }
   ];
 
-  const handleAddToCart = (service, tier = null) => {
-    const item = {
-      ...service,
-      price: tier ? tier.price : service.price || '999',
-      tier: tier ? tier.name : null
-    };
-    addToCart(item);
-    // Add visual feedback
-    const toast = document.createElement('div');
-    toast.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in-out';
-    toast.textContent = `${service.title} added to cart!`;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3000);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
   };
 
   return (
-    <PageLayout
-      title="Our Services"
-      subtitle="Comprehensive Digital Solutions for Modern Businesses"
-    >      {/* Hero Section */}
-      <motion.div
-        className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl overflow-hidden mb-20"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:60px_60px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/50" />
-        
-        <div className="relative max-w-7xl mx-auto py-24 px-6">
-          <motion.h1 
-            className="text-4xl md:text-5xl font-bold text-white text-center mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            Transform Your Digital Presence
-          </motion.h1>
-          <motion.p 
-            className="text-xl text-gray-300 text-center max-w-3xl mx-auto mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            Expert solutions tailored to your business needs
-          </motion.p>
-        </div>
-      </motion.div>
-
-      {/* Services Grid */}
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20"
-      >
-        {services.map((service, index) => (
-          <motion.div
-            key={index}
-            variants={itemVariants}
-            whileHover={{ scale: 1.05 }}            className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-800/90 via-gray-800/80 to-gray-900/90 backdrop-blur-lg p-8 hover:bg-gray-700/60 transition-all duration-500 border border-gray-700/30 hover:border-primary-500/50 hover:shadow-xl hover:shadow-primary-500/10 transform hover:-translate-y-1"
-          >
-            <service.icon className="h-12 w-12 text-primary-400 mb-6" />
-            <span className="inline-flex items-center px-3 py-1 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 text-primary-300 rounded-full text-sm mb-4 border border-primary-500/30 group-hover:border-primary-400/50 transition-all duration-300">
-              {service.category}
-            </span>
-            <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
-            <p className="text-gray-300 mb-6">{service.description}</p>
-            <ul className="space-y-3">
-              {service.features.map((feature, fIndex) => (
-                <li key={fIndex} className="flex items-center text-gray-300">
-                  <SparklesIcon className="h-5 w-5 text-primary-400 mr-2" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-            <div className="absolute inset-0 bg-gradient-to-r from-primary-900/20 to-secondary-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          </motion.div>
-        ))}
-      </motion.div>      {/* Why Choose Us */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="mb-20"
-      >
-        <motion.h2
-          variants={itemVariants}
-          className="text-3xl font-bold text-white text-center mb-12"
+    <div className="min-h-screen bg-black overflow-hidden">
+      <div className="fixed inset-0 bg-grid-pattern opacity-5 pointer-events-none z-0" />
+      <PageLayout>
+        {/* Hero Section */}
+        <motion.div
+          className="relative bg-white rounded-3xl overflow-hidden mb-20 border border-gray-200"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          Why Choose CraftNest
-        </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {whyChooseUs.map((item, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}              className="p-6 bg-gray-800/50 backdrop-blur-sm rounded-xl hover:bg-gray-700/50 transition-all duration-300 text-center border border-gray-700/50"
+          <div className="absolute inset-0 bg-white" />
+          <div className="absolute inset-0 bg-white" />
+          <div className="relative max-w-7xl mx-auto py-24 px-6">
+            <motion.h1 
+              className="text-4xl md:text-5xl font-bold text-pink-400 text-center mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
             >
-              <item.icon className="h-12 w-12 text-primary-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-              <p className="text-gray-300">{item.description}</p>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
+              Transform Your Digital Presence
+            </motion.h1>
+            <motion.p 
+              className="text-xl text-pink-200 text-center max-w-3xl mx-auto mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              Expert solutions tailored to your business needs
+            </motion.p>
+          </div>
+        </motion.div>
 
-      {/* Process Section */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="mb-20"
-      >
-        <motion.h2
-          variants={itemVariants}
-          className="text-3xl font-bold text-white text-center mb-12"
+        {/* Services Grid */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 bg-black"
         >
-          Our Process
-        </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {processSteps.map((step, index) => (
+          {services.map((service, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              className="relative"
-            >              <div className="p-6 bg-gray-800/50 backdrop-blur-sm rounded-xl hover:bg-gray-700/50 transition-all duration-300 border border-gray-700/50">
-                <div className="absolute -top-4 -left-4 w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-primary-500/20 border border-primary-500/50">
-                  {index + 1}
-                </div>
-                <step.icon className="h-12 w-12 text-primary-400 mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
-                <p className="text-gray-300">{step.description}</p>
-              </div>
-              {index < 3 && (
-                <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-1 bg-gradient-to-r from-primary-600 to-primary-500 transform -translate-y-1/2 rounded-full shadow-glow" />
-              )}
+              whileHover={{ scale: 1.05 }}
+              className="group relative overflow-hidden rounded-2xl bg-black p-8 hover:bg-gray-900 transition-all duration-500 border border-gray-700 hover:border-primary-300 hover:shadow-xl hover:shadow-primary-100/10 transform hover:-translate-y-1"
+            >
+              <service.icon className="h-12 w-12 text-primary-500 mb-6" />
+              <span className="inline-flex items-center px-3 py-1 bg-gradient-to-r from-primary-100/40 to-secondary-100/40 text-primary-700 rounded-full text-sm mb-4 border border-primary-100 group-hover:border-primary-300 transition-all duration-300">
+                {service.category}
+              </span>
+              <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
+              <p className="text-gray-300 mb-6">{service.description}</p>
+              <ul className="space-y-3">
+                {service.features.map((feature, fIndex) => (
+                  <li key={fIndex} className="flex items-center text-gray-300">
+                    <SparklesIcon className="h-5 w-5 text-primary-400 mr-2" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-50/20 to-secondary-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.div>
           ))}
-        </div>
-      </motion.section>
+        </motion.div>      {/* Why Choose Us */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="mb-20 bg-gradient-to-br from-black via-pink-950 to-pink-900"
+        >
+          <motion.h2
+            variants={itemVariants}
+            className="text-3xl font-bold text-pink-400 text-center mb-12"
+          >
+            Why Choose LaunchLayer
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {whyChooseUs.map((item, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                className="p-6 bg-gradient-to-br from-black via-pink-950 to-pink-900 border border-pink-900 rounded-xl hover:bg-pink-950 transition-all duration-300 text-center"
+              >
+                <item.icon className="h-12 w-12 text-primary-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-pink-400 mb-2">{item.title}</h3>
+                <p className="text-pink-200">{item.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
 
-      {/* Package Filter */}
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        className="mb-12"
-      >
-        <div className="flex flex-wrap justify-center gap-4">
-          <motion.button
+        {/* Process Section */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="mb-20 bg-gradient-to-br from-black via-pink-950 to-pink-900"
+        >
+          <motion.h2
             variants={itemVariants}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setSelectedTab('all')}
-            className={`px-6 py-2 rounded-lg transition-all duration-300 ${
-              selectedTab === 'all'
-                ? 'bg-primary-500 text-white'
-                : 'bg-white/5 text-gray-300 hover:bg-white/10'
-            }`}
+            className="text-3xl font-bold text-pink-400 text-center mb-12"
           >
-            All Packages
-          </motion.button>
-          <motion.button
-            variants={itemVariants}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setSelectedTab('dev')}
-            className={`px-6 py-2 rounded-lg transition-all duration-300 ${
-              selectedTab === 'dev'
-                ? 'bg-primary-500 text-white'
-                : 'bg-white/5 text-gray-300 hover:bg-white/10'
-            }`}
-          >
-            Development
-          </motion.button>
-          <motion.button
-            variants={itemVariants}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setSelectedTab('design')}
-            className={`px-6 py-2 rounded-lg transition-all duration-300 ${
-              selectedTab === 'design'
-                ? 'bg-primary-500 text-white'
-                : 'bg-white/5 text-gray-300 hover:bg-white/10'
-            }`}
-          >
-            Design
-          </motion.button>
-          <motion.button
-            variants={itemVariants}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setSelectedTab('marketing')}
-            className={`px-6 py-2 rounded-lg transition-all duration-300 ${
-              selectedTab === 'marketing'
-                ? 'bg-primary-500 text-white'
-                : 'bg-white/5 text-gray-300 hover:bg-white/10'
-            }`}
-          >
-            Marketing
-          </motion.button>
-        </div>
-      </motion.div>
+            Our Process
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {processSteps.map((step, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="relative"
+              >
+                <div className="p-6 bg-gradient-to-br from-black via-pink-950 to-pink-900 border border-pink-900 rounded-xl hover:bg-pink-950 transition-all duration-300">
+                  <div className="absolute -top-4 -left-4 w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center text-primary-700 font-bold shadow-lg shadow-primary-100/20 border border-primary-200">
+                    {index + 1}
+                  </div>
+                  <step.icon className="h-12 w-12 text-primary-500 mb-4" />
+                  <h3 className="text-xl font-bold text-pink-400 mb-2">{step.title}</h3>
+                  <p className="text-pink-200">{step.description}</p>
+                </div>
+                {index < 3 && (
+                  <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-1 bg-gradient-to-r from-primary-200 to-primary-100 transform -translate-y-1/2 rounded-full shadow-glow" />
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
 
-      {/* Pricing Grid */}
-      <motion.section
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        className="mb-20"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {packages.map((pkg, index) => (
-            <motion.div
-              key={index}
+        {/* Package Filter */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          className="mb-12 bg-black"
+        >
+          <div className="flex flex-wrap justify-center gap-4">
+            <motion.button
               variants={itemVariants}
-              className={`relative group rounded-2xl overflow-hidden ${
-                pkg.featured 
-                  ? 'md:col-span-2 lg:col-span-1 scale-105 z-10' 
-                  : ''
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setSelectedTab('all')}
+              className={`px-6 py-2 rounded-lg transition-all duration-300 ${
+                selectedTab === 'all'
+                  ? 'bg-primary-500 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-primary-50'
               }`}
             >
-              {/* Card Background with Gradient Border */}
-              <div className="absolute inset-0.5 bg-gray-900 rounded-2xl z-0" />              <div className={`relative h-full p-8 backdrop-blur-lg backdrop-brightness-125 group-hover:backdrop-brightness-150 transition-all duration-500 ${
-                pkg.featured
-                  ? 'bg-gradient-to-br from-primary-900/10 via-gray-900/95 to-secondary-900/10 border-2 border-primary-500/20'
-                  : 'bg-gradient-to-br from-gray-900/95 via-gray-900/90 to-gray-800/95 border border-gray-700/30'
-              }`}>
-                {pkg.featured && (
-                  <div className="absolute top-0 right-0 bg-gradient-to-r from-primary-500 to-secondary-500 text-white text-sm px-4 py-1 rounded-bl-lg">
-                    Most Popular
-                  </div>
-                )}
+              All Packages
+            </motion.button>
+            <motion.button
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setSelectedTab('dev')}
+              className={`px-6 py-2 rounded-lg transition-all duration-300 ${
+                selectedTab === 'dev'
+                  ? 'bg-primary-500 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-primary-50'
+              }`}
+            >
+              Development
+            </motion.button>
+            <motion.button
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setSelectedTab('design')}
+              className={`px-6 py-2 rounded-lg transition-all duration-300 ${
+                selectedTab === 'design'
+                  ? 'bg-primary-500 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-primary-50'
+              }`}
+            >
+              Design
+            </motion.button>
+            <motion.button
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setSelectedTab('marketing')}
+              className={`px-6 py-2 rounded-lg transition-all duration-300 ${
+                selectedTab === 'marketing'
+                  ? 'bg-primary-500 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-primary-50'
+              }`}
+            >
+              Marketing
+            </motion.button>
+          </div>
+        </motion.div>
 
-                <pkg.icon className="w-12 h-12 text-primary-400 mb-6" />
-                
-                <h3 className="text-2xl font-bold text-white mb-2">
-                  {pkg.title}
-                </h3>
-                <p className="text-primary-400 mb-4">{pkg.subtitle}</p>
-                  {pkg.priceRange ? (
-                  <div className="text-2xl font-bold bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent mb-4">
-                    {pkg.priceRange}
-                    {pkg.priceRange.includes('/month') && (
-                      <span className="text-sm font-normal text-gray-400 ml-1">/month</span>
-                    )}
-                  </div>
-                ) : pkg.priceVariants ? (
-                  <div className="space-y-2 mb-4">
-                    {pkg.priceVariants.map((variant, idx) => (
-                      <div key={idx} className="flex justify-between items-center text-sm bg-gray-800/40 p-2 rounded-lg backdrop-blur-sm">
-                        <span className="text-gray-300">{variant.name}</span>
-                        <span className="text-primary-400 font-semibold">{variant.price}</span>
+        {/* Pricing Grid */}
+        <motion.section
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          className="mb-20 bg-black"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {packages.map((pkg, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className={`relative group rounded-2xl overflow-hidden ${
+                  pkg.featured 
+                    ? 'md:col-span-2 lg:col-span-1 scale-105 z-10' 
+                    : ''
+                }`}
+              >
+                {/* Card Background with Gradient Border */}
+                <div className="absolute inset-0.5 bg-gradient-to-br from-black via-pink-900 to-pink-700 rounded-2xl z-0" />
+                <div className={`relative h-full p-8 group-hover:backdrop-brightness-110 transition-all duration-500 ${
+                  pkg.featured
+                    ? 'bg-gradient-to-br from-pink-900/80 via-black/90 to-pink-700/80 border-2 border-pink-400/60'
+                    : 'bg-gradient-to-br from-black via-pink-950 to-pink-900 border border-pink-900'
+                }`}>
+                  {pkg.featured && (
+                    <div className="absolute top-0 right-0 bg-gradient-to-r from-primary-400 to-secondary-400 text-white text-sm px-4 py-1 rounded-bl-lg">
+                      Most Popular
+                    </div>
+                  )}
+
+                  <pkg.icon className="w-12 h-12 text-primary-500 mb-6" />
+                  
+                  <h3 className="text-2xl font-bold text-pink-400 mb-2">
+                    {pkg.title}
+                  </h3>
+                  <p className="text-pink-300 mb-4">{pkg.subtitle}</p>
+                    {pkg.priceRange ? (
+                    <div className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent mb-4">
+                      {pkg.priceRange}
+                      {pkg.priceRange && pkg.priceRange.includes('/month') && (
+                        <span className="text-sm font-normal text-pink-200 ml-1">/month</span>
+                      )}
+                    </div>
+                  ) : pkg.priceVariants ? (
+                    <div className="space-y-2 mb-4">
+                      {pkg.priceVariants.map((variant, idx) => (
+                        <div key={idx} className="flex justify-between items-center text-sm bg-pink-950/40 p-2 rounded-lg">
+                          <span className="text-pink-200">{variant.name}</span>
+                          <span className="text-pink-400 font-semibold">{variant.price}</span>
+                        </div>
+                      ))}
+                    </div>
+                  ) : pkg.monthlyPrice ? (
+                    <div className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent mb-4">
+                      ${pkg.monthlyPrice}
+                      <span className="text-sm font-normal text-pink-200 ml-1">/month</span>
+                    </div>                ) : null}
+
+                  <p className="text-sm text-pink-200 mb-6">
+                    Best For: {pkg.bestFor}
+                  </p>
+
+                  <div className="space-y-4 mb-8">
+                    {pkg.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-start">
+                        <div className="flex-shrink-0 h-6 w-6 text-pink-400">✓</div>
+                        <span className="ml-3 text-pink-200">{feature}</span>
                       </div>
                     ))}
                   </div>
-                ) : pkg.monthlyPrice ? (
-                  <div className="text-2xl font-bold bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent mb-4">
-                    ${pkg.monthlyPrice}
-                    <span className="text-sm font-normal text-gray-400 ml-1">/month</span>
-                  </div>                ) : null}
 
-                <p className="text-sm text-gray-400 mb-6">
-                  Best For: {pkg.bestFor}
-                </p>
+                  {pkg.delivery && (
+                    <p className="text-sm text-pink-200 mb-6">
+                      Delivery: {pkg.delivery}
+                    </p>
+                  )}                <motion.button
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      const itemToAdd = {
+                        ...pkg,
+                        price: pkg.priceRange || (pkg.priceVariants && pkg.priceVariants[0].price) || `$${pkg.monthlyPrice}`
+                      };
+                      addToCart(itemToAdd);
+                    }}
+                    className={`w-full py-4 px-6 rounded-lg font-medium transition-all duration-300 bg-gradient-to-r from-pink-500 to-pink-700 text-white hover:shadow-lg hover:shadow-pink-500/25 border border-pink-400`}
+                  >
+                    Get Started
+                  </motion.button>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
 
-                <div className="space-y-4 mb-8">
-                  {pkg.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-start">
-                      <div className="flex-shrink-0 h-6 w-6 text-primary-400">✓</div>
-                      <span className="ml-3 text-gray-300">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {pkg.delivery && (
-                  <p className="text-sm text-gray-400 mb-6">
-                    Delivery: {pkg.delivery}
-                  </p>
-                )}                <motion.button
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => {
-                    const itemToAdd = {
-                      ...pkg,
-                      price: pkg.priceRange || (pkg.priceVariants && pkg.priceVariants[0].price) || `$${pkg.monthlyPrice}`
-                    };
-                    addToCart(itemToAdd);
-                  }}
-                  className={`w-full py-4 px-6 rounded-lg font-medium transition-all duration-300 ${
-                    pkg.featured
-                      ? 'bg-gradient-to-r from-primary-500 to-secondary-500 text-white hover:shadow-lg hover:shadow-primary-500/25 border border-primary-500/50'
-                      : 'bg-white/5 text-white hover:bg-white/10 border border-gray-700/50 hover:border-primary-500/50'
-                  }`}
-                >
-                  Get Started
-                </motion.button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
-
-      {/* Other sections */}
-      {/* CTA Section */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="text-center"
-      >
-        <motion.div
-          variants={itemVariants}          className="p-12 bg-gray-800/70 backdrop-blur-md rounded-2xl relative overflow-hidden border border-gray-700"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to Start Your Project?
-          </h2>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-            Let's discuss how we can help transform your business with our innovative solutions.
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            className="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-lg shadow-lg shadow-primary-500/20 inline-flex items-center border border-primary-500/50"
+          {/* Other sections */}
+          {/* CTA Section */}
+          <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className="text-center bg-white"
           >
-            Schedule a Consultation
-            <RocketLaunchIcon className="w-5 h-5 ml-2" />
-          </motion.button>
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-900/30 to-secondary-900/30 -z-10" />
-        </motion.div>
-      </motion.section>
-    </PageLayout>
+            <motion.div
+              variants={itemVariants}          className="p-12 bg-white rounded-2xl relative overflow-hidden border border-gray-200"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                Ready to Start Your Project?
+              </h2>
+              <p className="text-gray-700 mb-8 max-w-2xl mx-auto">
+                Let's discuss how we can help transform your business with our innovative solutions.
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                className="px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white rounded-lg shadow-lg shadow-primary-500/20 inline-flex items-center border border-primary-300"
+              >
+                Schedule a Consultation
+                <RocketLaunchIcon className="w-5 h-5 ml-2" />
+              </motion.button>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-50/40 to-secondary-100/40 -z-10" />
+            </motion.div>
+          </motion.section>
+        </PageLayout>
+      </div>
   );
 };
 

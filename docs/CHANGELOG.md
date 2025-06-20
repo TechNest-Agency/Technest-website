@@ -29,4 +29,4 @@ node scripts/cleanupCourses.js
 3. Remove any course-related environment variables
 4. Update your analytics tracking to exclude course-related events
 
-For users who need course management features, please continue using v1.x releases or consider using a dedicated Learning Management System (LMS) alongside TechNest.
+For users who need course management features, please continue using v1.x releases or consider using a dedicated Learning Management System (LMS) alongside LaunchLayer.

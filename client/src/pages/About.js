@@ -233,208 +233,211 @@ const About = () => {
   };
 
   return (
-    <PageLayout
-      title="About CraftNest"
-      subtitle="Pioneering Digital Excellence Through Innovation and Expertise"
-    >
-      {/* Mission & Vision */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="mb-20"
+    <div className="min-h-screen bg-white overflow-hidden">
+      <div className="fixed inset-0 bg-grid-pattern opacity-5 pointer-events-none z-0" />
+      <PageLayout
+        title="About Us"
+        subtitle="Learn more about LaunchLayer and our journey."
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <motion.div
-            variants={itemVariants}
-            className="p-8 bg-white/5 backdrop-blur-sm rounded-2xl hover:bg-white/10 transition-all duration-300"
-          >
-            <LightBulbIcon className="h-12 w-12 text-primary-400 mb-4" />
-            <h3 className="text-2xl font-bold text-white mb-4">Our Mission</h3>
-            <p className="text-gray-300">
-              To empower businesses through innovative digital solutions, driving growth and transformation in the modern tech landscape.
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={itemVariants}
-            className="p-8 bg-white/5 backdrop-blur-sm rounded-2xl hover:bg-white/10 transition-all duration-300"
-          >
-            <SparklesIcon className="h-12 w-12 text-secondary-400 mb-4" />
-            <h3 className="text-2xl font-bold text-white mb-4">Our Vision</h3>
-            <p className="text-gray-300">
-              To be the leading force in digital innovation, setting new standards in technology solutions globally.
-            </p>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* Timeline */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="mb-20"
-      >
-        <motion.h2
-          variants={itemVariants}
-          className="text-3xl font-bold text-white text-center mb-12"
+        {/* Mission & Vision */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="mb-20"
         >
-          Our Journey
-        </motion.h2>
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary-500 to-secondary-500" />
-          
-          <div className="space-y-16">
-            {milestones.map((milestone, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <motion.div
+              variants={itemVariants}
+              className="p-8 bg-white/5 backdrop-blur-sm rounded-2xl hover:bg-white/10 transition-all duration-300"
+            >
+              <LightBulbIcon className="h-12 w-12 text-primary-400 mb-4" />
+              <h3 className="text-2xl font-bold text-white mb-4">Our Mission</h3>
+              <p className="text-gray-300">
+                To empower businesses through innovative digital solutions, driving growth and transformation in the modern tech landscape.
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={itemVariants}
+              className="p-8 bg-white/5 backdrop-blur-sm rounded-2xl hover:bg-white/10 transition-all duration-300"
+            >
+              <SparklesIcon className="h-12 w-12 text-secondary-400 mb-4" />
+              <h3 className="text-2xl font-bold text-white mb-4">Our Vision</h3>
+              <p className="text-gray-300">
+                To be the leading force in digital innovation, setting new standards in technology solutions globally.
+              </p>
+            </motion.div>
+          </div>
+        </motion.section>
+
+        {/* Timeline */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="mb-20"
+        >
+          <motion.h2
+            variants={itemVariants}
+            className="text-3xl font-bold text-white text-center mb-12"
+          >
+            Our Journey
+          </motion.h2>
+          <div className="relative">
+            {/* Timeline line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary-500 to-secondary-500" />
+            
+            <div className="space-y-16">
+              {milestones.map((milestone, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  className={`flex items-center ${
+                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                  } gap-8`}
+                >
+                  <div className={`flex-1 ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
+                    <div className="p-6 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 transition-all duration-300">
+                      <span className="text-primary-400 font-bold">{milestone.year}</span>
+                      <h3 className="text-xl font-bold text-white mt-2">{milestone.title}</h3>
+                      <p className="text-gray-300 mt-2">{milestone.description}</p>
+                    </div>
+                  </div>
+                  <div className="relative flex items-center justify-center">
+                    <div className="w-8 h-8 bg-primary-500 rounded-full border-4 border-gray-900" />
+                  </div>
+                  <div className="flex-1" />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Office Culture */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="mb-20"
+        >
+          <motion.h2
+            variants={itemVariants}
+            className="text-3xl font-bold text-white text-center mb-12"
+          >
+            Our Culture
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {officeCulture.map((item, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className={`flex items-center ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                } gap-8`}
+                whileHover={{ scale: 1.05 }}
+                className="p-6 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 transition-all duration-300"
               >
-                <div className={`flex-1 ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
-                  <div className="p-6 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 transition-all duration-300">
-                    <span className="text-primary-400 font-bold">{milestone.year}</span>
-                    <h3 className="text-xl font-bold text-white mt-2">{milestone.title}</h3>
-                    <p className="text-gray-300 mt-2">{milestone.description}</p>
-                  </div>
-                </div>
-                <div className="relative flex items-center justify-center">
-                  <div className="w-8 h-8 bg-primary-500 rounded-full border-4 border-gray-900" />
-                </div>
-                <div className="flex-1" />
+                <item.icon className="h-12 w-12 text-primary-400 mb-4" />
+                <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                <p className="text-gray-300">{item.description}</p>
               </motion.div>
             ))}
           </div>
-        </div>
-      </motion.section>
+        </motion.section>
 
-      {/* Office Culture */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="mb-20"
-      >
-        <motion.h2
-          variants={itemVariants}
-          className="text-3xl font-bold text-white text-center mb-12"
+        {/* Awards */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="mb-20"
         >
-          Our Culture
-        </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {officeCulture.map((item, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              className="p-6 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 transition-all duration-300"
-            >
-              <item.icon className="h-12 w-12 text-primary-400 mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-              <p className="text-gray-300">{item.description}</p>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
-
-      {/* Awards */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="mb-20"
-      >
-        <motion.h2
-          variants={itemVariants}
-          className="text-3xl font-bold text-white text-center mb-12"
-        >
-          Recognition & Awards
-        </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {awards.map((award, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              className="relative group p-6 bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden"
-            >
-              <TrophyIcon className="h-12 w-12 text-primary-400 mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">{award.title}</h3>
-              <p className="text-gray-400">{award.organization}</p>
-              <span className="text-primary-400 font-bold">{award.year}</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-secondary-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
-
-      {/* Community Initiatives */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="mb-20"
-      >
-        <motion.h2
-          variants={itemVariants}
-          className="text-3xl font-bold text-white text-center mb-12"
-        >
-          Community Impact
-        </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {communityInitiatives.map((initiative, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              className="p-6 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 transition-all duration-300"
-            >
-              <initiative.icon className="h-12 w-12 text-secondary-400 mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">{initiative.title}</h3>
-              <p className="text-gray-300">{initiative.description}</p>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
-
-      {/* CTA Section */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="text-center mb-20"
-      >
-        <motion.div
-          variants={itemVariants}
-          className="p-12 bg-white/5 backdrop-blur-md rounded-2xl relative overflow-hidden"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to Transform Your Ideas?
-          </h2>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join us in creating innovative solutions that drive business success in the digital age.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transform transition hover:scale-105 shadow-lg"
+          <motion.h2
+            variants={itemVariants}
+            className="text-3xl font-bold text-white text-center mb-12"
           >
-            Get In Touch
-            <PhoneIcon className="w-5 h-5 ml-2" />
-          </Link>
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 -z-10" />
-        </motion.div>
-      </motion.section>
-    </PageLayout>
+            Recognition & Awards
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {awards.map((award, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                className="relative group p-6 bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden"
+              >
+                <TrophyIcon className="h-12 w-12 text-primary-400 mb-4" />
+                <h3 className="text-xl font-bold text-white mb-2">{award.title}</h3>
+                <p className="text-gray-400">{award.organization}</p>
+                <span className="text-primary-400 font-bold">{award.year}</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-secondary-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* Community Initiatives */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="mb-20"
+        >
+          <motion.h2
+            variants={itemVariants}
+            className="text-3xl font-bold text-white text-center mb-12"
+          >
+            Community Impact
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {communityInitiatives.map((initiative, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                className="p-6 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 transition-all duration-300"
+              >
+                <initiative.icon className="h-12 w-12 text-secondary-400 mb-4" />
+                <h3 className="text-xl font-bold text-white mb-2">{initiative.title}</h3>
+                <p className="text-gray-300">{initiative.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* CTA Section */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="text-center mb-20"
+        >
+          <motion.div
+            variants={itemVariants}
+            className="p-12 bg-white/5 backdrop-blur-md rounded-2xl relative overflow-hidden"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Ready to Transform Your Ideas?
+            </h2>
+            <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+              Join us in creating innovative solutions that drive business success in the digital age.
+            </p>
+            <Link
+              to="/contact"
+              className="inline-flex items-center px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transform transition hover:scale-105 shadow-lg"
+            >
+              Get In Touch
+              <PhoneIcon className="w-5 h-5 ml-2" />
+            </Link>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 -z-10" />
+          </motion.div>
+        </motion.section>
+      </PageLayout>
+    </div>
   );
 };
 

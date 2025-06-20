@@ -12,6 +12,13 @@ import {
   BeakerIcon,
   SparklesIcon
 } from '@heroicons/react/24/outline';
+import Newsletter from '../components/Newsletter';
+// import FeaturedWork from '../components/FeaturedWork';
+// import PackagesPreview from '../components/PackagesPreview';
+// import WhyChooseUs from '../components/WhyChooseUs';
+// import Testimonials from '../components/Testimonials';
+// import ProcessOverview from '../components/ProcessOverview';
+// import LiveFeed from '../components/LiveFeed';
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -65,7 +72,7 @@ const Home = () => {
       name: "Sarah Johnson",
       role: "CEO at TechCorp",
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
-      quote: "TechNest transformed our digital presence. Their innovative solutions helped us achieve a 200% growth in user engagement."
+      quote: "LaunchLayer transformed our digital presence. Their innovative solutions helped us achieve a 200% growth in user engagement."
     },
     {
       name: "Michael Chen",
@@ -77,7 +84,7 @@ const Home = () => {
       name: "Emma Williams",
       role: "Product Manager at StartupX",
       image: "https://images.unsplash.com/photo-1580489944761-15a19d654956",
-      quote: "Working with CraftNest was a game-changer. Their attention to detail and innovative approach set them apart."
+      quote: "Working with LaunchLayer was a game-changer. Their attention to detail and innovative approach set them apart."
     }
   ];
 
@@ -137,10 +144,10 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] overflow-hidden">
+    <div className="min-h-screen bg-white overflow-hidden">
       <div className="fixed inset-0 bg-grid-pattern opacity-5" />
       {isLoading ? (
-        <div className="fixed inset-0 bg-[#0a0a0a] flex items-center justify-center">
+        <div className="fixed inset-0 bg-white flex items-center justify-center">
           <motion.div
             animate={{
               scale: [1, 1.2, 1],
@@ -151,7 +158,7 @@ const Home = () => {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full"
+            className="w-16 h-16 border-4 border-purple-400 border-t-transparent rounded-full"
           />
         </div>
       ) : (
@@ -240,7 +247,7 @@ const Home = () => {
 
                 <motion.p 
                   variants={itemVariants}
-                  className="mt-8 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed backdrop-blur-sm"
+                  className="mt-8 text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed"
                 >
                   We create cutting-edge digital solutions that help businesses thrive in the modern world. 
                   Experience innovation that drives success.
@@ -262,9 +269,9 @@ const Home = () => {
                   </Link>
                   <Link
                     to="/portfolio"
-                    className="group relative px-8 py-4 bg-white/5 backdrop-blur-sm text-white rounded-full text-lg font-semibold overflow-hidden transform transition-all duration-300 hover:scale-105"
+                    className="group relative px-8 py-4 bg-gray-100 text-gray-900 rounded-full text-lg font-semibold overflow-hidden transform transition-all duration-300 hover:scale-105"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 via-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-100/40 via-purple-100/40 to-blue-100/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <span className="relative">View Our Work</span>
                   </Link>
                 </motion.div>
@@ -293,10 +300,10 @@ const Home = () => {
                   <motion.div
                     key={index}
                     whileHover={{ scale: 1.05, rotateX: 10 }}
-                    className="flex items-center bg-white/5 backdrop-blur-md rounded-xl px-6 py-3 border border-white/10 shadow-xl"
+                    className="flex items-center bg-gray-100 rounded-xl px-6 py-3 border border-gray-200 shadow-xl"
                   >
                     <img src={tech.logo} alt={tech.name} className="w-8 h-8 mr-3" />
-                    <span className="text-white/80 text-sm font-medium">{tech.name}</span>
+                    <span className="text-gray-700 text-sm font-medium">{tech.name}</span>
                   </motion.div>
                 ))}
               </motion.div>
@@ -311,7 +318,7 @@ const Home = () => {
             variants={containerVariants}
             className="py-24 px-4 sm:px-6 lg:px-8 relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-orange-500/5 via-purple-500/5 to-blue-500/5" />
+            <div className="absolute inset-0 bg-gradient-to-b from-orange-100/40 via-purple-100/40 to-blue-100/40" />
             <div className="max-w-7xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {stats.map((stat, index) => (
@@ -325,14 +332,14 @@ const Home = () => {
                     }}
                     className="relative group perspective"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 via-purple-500/20 to-blue-500/20 rounded-2xl blur-xl transform group-hover:scale-110 transition-transform duration-300" />
-                    <div className="relative p-8 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 transform transition-all duration-300">
-                      <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-100/40 via-purple-100/40 to-blue-100/40 rounded-2xl blur-xl transform group-hover:scale-110 transition-transform duration-300" />
+                    <div className="relative p-8 bg-white rounded-2xl border border-gray-200 transform transition-all duration-300">
+                      <div className="absolute inset-0 bg-gradient-to-r from-orange-100/40 via-purple-100/40 to-blue-100/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
                       <stat.icon className="h-12 w-12 text-orange-400 mb-4 transform group-hover:scale-110 transition-transform duration-300" />
                       <h3 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-purple-400 to-blue-400 mb-2">
                         {stat.number}
                       </h3>
-                      <p className="text-gray-300 font-medium">{stat.label}</p>
+                      <p className="text-gray-700 font-medium">{stat.label}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -375,7 +382,7 @@ const Home = () => {
                 <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-purple-400 to-blue-400 mb-6">
                   Our Services
                 </h2>
-                <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+                <p className="text-gray-700 text-lg max-w-2xl mx-auto">
                   Empowering your digital journey with cutting-edge solutions
                 </p>
               </motion.div>
@@ -390,12 +397,12 @@ const Home = () => {
                   }}
                   className="group relative perspective"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-purple-500/20 rounded-2xl blur-xl transform group-hover:scale-110 transition-transform duration-300" />
-                  <div className="relative p-8 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-orange-500/50 transition-all duration-300">
-                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-orange-100/40 to-purple-100/40 rounded-2xl blur-xl transform group-hover:scale-110 transition-transform duration-300" />
+                  <div className="relative p-8 bg-white rounded-2xl border border-gray-200 hover:border-orange-300 transition-all duration-300">
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-100/40 to-purple-100/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
                     <CloudArrowUpIcon className="h-12 w-12 text-orange-400 mb-6 transform group-hover:scale-110 transition-transform duration-300" />
-                    <h3 className="text-2xl font-semibold text-white mb-4">Cloud Solutions</h3>
-                    <p className="text-gray-300">Scale your infrastructure with our cutting-edge cloud solutions and seamless deployment strategies.</p>
+                    <h3 className="text-2xl font-semibold text-gray-900 mb-4">Cloud Solutions</h3>
+                    <p className="text-gray-700">Scale your infrastructure with our cutting-edge cloud solutions and seamless deployment strategies.</p>
                   </div>
                 </motion.div>
 
@@ -408,12 +415,12 @@ const Home = () => {
                   }}
                   className="group relative perspective"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-2xl blur-xl transform group-hover:scale-110 transition-transform duration-300" />
-                  <div className="relative p-8 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300">
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-100/40 to-blue-100/40 rounded-2xl blur-xl transform group-hover:scale-110 transition-transform duration-300" />
+                  <div className="relative p-8 bg-white rounded-2xl border border-gray-200 hover:border-purple-300 transition-all duration-300">
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-100/40 to-blue-100/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
                     <CpuChipIcon className="h-12 w-12 text-purple-400 mb-6 transform group-hover:scale-110 transition-transform duration-300" />
-                    <h3 className="text-2xl font-semibold text-white mb-4">AI & Machine Learning</h3>
-                    <p className="text-gray-300">Harness the power of artificial intelligence to transform your business processes and decision-making.</p>
+                    <h3 className="text-2xl font-semibold text-gray-900 mb-4">AI & Machine Learning</h3>
+                    <p className="text-gray-700">Harness the power of artificial intelligence to transform your business processes and decision-making.</p>
                   </div>
                 </motion.div>
 
@@ -426,12 +433,12 @@ const Home = () => {
                   }}
                   className="group relative perspective"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-orange-500/20 rounded-2xl blur-xl transform group-hover:scale-110 transition-transform duration-300" />
-                  <div className="relative p-8 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-blue-500/50 transition-all duration-300">
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-100/40 to-orange-100/40 rounded-2xl blur-xl transform group-hover:scale-110 transition-transform duration-300" />
+                  <div className="relative p-8 bg-white rounded-2xl border border-gray-200 hover:border-blue-300 transition-all duration-300">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-100/40 to-orange-100/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
                     <BeakerIcon className="h-12 w-12 text-blue-400 mb-6 transform group-hover:scale-110 transition-transform duration-300" />
-                    <h3 className="text-2xl font-semibold text-white mb-4">R&D Services</h3>
-                    <p className="text-gray-300">Push the boundaries of innovation with our research and development expertise.</p>
+                    <h3 className="text-2xl font-semibold text-gray-900 mb-4">R&D Services</h3>
+                    <p className="text-gray-700">Push the boundaries of innovation with our research and development expertise.</p>
                   </div>
                 </motion.div>
               </div>
@@ -439,7 +446,7 @@ const Home = () => {
           </motion.section>
 
           {/* Featured Projects */}
-          <motion.section
+          {/* <motion.section
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -454,7 +461,7 @@ const Home = () => {
                 <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 mb-6">
                   Featured Projects
                 </h2>
-                <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+                <p className="text-gray-700 text-lg max-w-2xl mx-auto">
                   Discover our latest work and innovative solutions
                 </p>
               </motion.div>
@@ -467,8 +474,8 @@ const Home = () => {
                     whileHover={{ scale: 1.03 }}
                     className="group relative"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-2xl blur-xl transform group-hover:scale-110 transition-transform duration-300" />
-                    <div className="relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-purple-500/50 transition-colors duration-300">
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-100/40 to-pink-100/40 rounded-2xl blur-xl transform group-hover:scale-110 transition-transform duration-300" />
+                    <div className="relative overflow-hidden rounded-2xl bg-white border border-gray-200 hover:border-purple-300 transition-colors duration-300">
                       <div className="aspect-w-16 aspect-h-9 overflow-hidden">
                         <img
                           src={project.image}
@@ -477,12 +484,12 @@ const Home = () => {
                         />
                       </div>
                       <div className="p-6">
-                        <span className="inline-block px-3 py-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 rounded-full text-sm font-medium mb-4">
+                        <span className="inline-block px-3 py-1 bg-gradient-to-r from-purple-100/40 to-pink-100/40 text-purple-700 rounded-full text-sm font-medium mb-4">
                           {project.category}
                         </span>
-                        <h3 className="text-2xl font-semibold text-white mb-3">{project.title}</h3>
-                        <p className="text-gray-300 mb-4">{project.description}</p>
-                        <button className="text-purple-400 hover:text-purple-300 transition-colors duration-300 flex items-center">
+                        <h3 className="text-2xl font-semibold text-gray-900 mb-3">{project.title}</h3>
+                        <p className="text-gray-700 mb-4">{project.description}</p>
+                        <button className="text-purple-600 hover:text-purple-500 transition-colors duration-300 flex items-center">
                           Learn More
                           <ArrowRightIcon className="w-4 h-4 ml-2" />
                         </button>
@@ -492,64 +499,17 @@ const Home = () => {
                 ))}
               </div>
             </div>
-          </motion.section>          {/* Newsletter Section */}
-          <motion.section
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
-            className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
-          >
-            {/* Animated background elements */}
-            <motion.div
-              animate={{
-                rotate: 360,
-                scale: [1, 1.2, 1],
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px]"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 rounded-full blur-3xl transform rotate-45" />
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-3xl transform -rotate-45" />
-            </motion.div>
+          </motion.section> */}
+          {/* Custom LaunchLayer Sections */}
+          {/* <FeaturedWork /> */}
+          {/* <PackagesPreview /> */}
+          {/* <WhyChooseUs /> */}
+          {/* <Testimonials /> */}
+          {/* <ProcessOverview /> */}
+          {/* <LiveFeed /> */}
 
-            <div className="max-w-4xl mx-auto relative">
-              <motion.div
-                variants={itemVariants}
-                className="relative bg-white/5 backdrop-blur-xl p-8 md:p-12 rounded-2xl border border-white/10"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-2xl" />
-                <div className="relative">
-                  <h2 className="text-3xl md:text-4xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 mb-4">
-                    Stay Updated
-                  </h2>
-                  <p className="text-gray-300 text-center mb-8">
-                    Subscribe to our newsletter for the latest tech insights and updates.
-                  </p>
-                  <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-4">
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      className="flex-1 px-6 py-4 bg-white/10 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white/15 transition-all duration-300"
-                    />
-                    <button
-                      type="submit"
-                      className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold transform transition hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
-                    >
-                      Subscribe
-                    </button>
-                  </form>
-                  <p className="text-gray-400 text-sm text-center mt-4">
-                    We respect your privacy. Unsubscribe at any time.
-                  </p>
-                </div>
-              </motion.div>
-            </div>
-          </motion.section>
+          {/* Newsletter Section */}
+          <Newsletter />
         </>
       )}
     </div>

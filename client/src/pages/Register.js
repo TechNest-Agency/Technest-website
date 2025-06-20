@@ -65,13 +65,7 @@ const Register = () => {
   };
 
   return (
-    <div
-      className={`min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ${
-        isDarkMode
-          ? "bg-gray-900"
-          : "bg-gradient-to-br from-indigo-50 via-white to-purple-50"
-      }`}
-    >
+    <div className="min-h-screen bg-white">
       <div className="max-w-md w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

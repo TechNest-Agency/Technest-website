@@ -5,7 +5,7 @@ import { CheckCircleIcon } from '@heroicons/react/24/outline';
 
 const ThankYou = () => {
   return (
-    <div className="min-h-screen py-12 bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-white">
       <div className="container max-w-3xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

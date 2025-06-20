@@ -113,7 +113,7 @@ class EmailService {
             await this.transporter.sendMail({
                 from: `${this.settings.email.from.name} <${this.settings.email.from.email}>`,
                 to: user.email,
-                subject: 'Order Confirmation - TechNest Solutions',
+                subject: 'Order Confirmation - LaunchLayer Solutions',
                 html: `
                     <h2>Thank you for your order!</h2>
                     <p>Your order details:</p>

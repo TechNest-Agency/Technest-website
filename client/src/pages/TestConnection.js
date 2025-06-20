@@ -24,7 +24,7 @@ const TestConnection = () => {
     }, []);
 
     return (
-        <div className={`min-h-screen flex items-center justify-center ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        <div className="min-h-screen bg-white">
             <div className={`max-w-md w-full space-y-4 p-8 rounded-lg shadow ${
                 isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
             }`}>
@@ -48,4 +48,4 @@ const TestConnection = () => {
     );
 };
 
-export default TestConnection; 
+export default TestConnection;

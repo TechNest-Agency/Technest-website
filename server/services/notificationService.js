@@ -59,8 +59,8 @@ class NotificationService {
                 break;
 
             default:
-                subject = 'TechNest Notification';
-                message = 'You have a new notification from TechNest.';
+                subject = 'LaunchLayer Notification';
+                message = 'You have a new notification from LaunchLayer.';
         }
 
         await emailService.sendEmail(email, subject, message);
